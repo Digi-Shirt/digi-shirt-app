@@ -12,8 +12,9 @@ import { MonoText } from '../components/StyledText';
 export default function HomeScreen() {
   return (
     <View>
-      <Text>Hello World</Text>
-      <NewsItem title="Hello News" />     
+      <NewsItem title="Hello News" />
+      <NewsItem title="Hello News" />  
+      <NewsItem title="Hello News" />       
     </View>    
   );
 }

@@ -6,7 +6,7 @@ import { View, Text, StyleSheet} from 'react-native'
 export default function NewsItem(props) {
   return (
     <View style={styles.NewsItemContainer}>
-      <Text>{props.title}</Text>
+      <Text style={styles.NewsText}>{props.title}</Text>
     </View>
   );
 }
@@ -15,12 +15,23 @@ const styles = StyleSheet.create({
     NewsItemContainer: {
       flex: 1,
       borderColor: '#333',
-      borderWidth: '2',
-      minHeight: '150',
-      backgroundColor: '#16e'      
+      minHeight: 150,
+      marginHorizontal: 10,
+      marginTop: 10,
+      padding: 10,
+      backgroundColor: '#16e',
+            
+    },
+    NewsText: {
+      flex:1,
+      flexDirection: "column",
+      fontSize: 30,
+      textAlign: "right",
+      textAlignVertical: "bottom",
+      color: '#FFF',
     },
     container: {
       flex: 1,
       backgroundColor: '#fafafa',
-    }
+    },
 });
