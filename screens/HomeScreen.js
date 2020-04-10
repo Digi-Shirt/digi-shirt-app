@@ -4,6 +4,8 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList } f
 import { ScrollView } from 'react-native-gesture-handler';
 import NewsItem from '../components/NewsItem'
 
+// Test data
+import MockNewsData from '../components/__mock__/newsItems';
 // Import fonts
 import { MonoText } from '../components/StyledText';
 
@@ -26,31 +28,7 @@ HomeScreen.navigationOptions = {
   header: null,
 };
 
-/**
- * This is mock placeholder news data
- */
-const newsData = [
-  {
-    id: '1',
-    title: "PAWS Day",
-  }, 
-  {
-    id: '2',
-    title: "Commander's Call",
-  },
-  {
-    id: '3',
-    title: "Data Burst",
-  },
-  {
-    id: '4',
-    title: "Shirts Notes",
-  },
-  {
-    id: '5',
-    title: "Another item",
-  },
-];
+const newsData = MockNewsData();
 
 const styles = StyleSheet.create({
   container: {
