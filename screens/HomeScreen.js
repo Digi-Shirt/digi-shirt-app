@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import NewsItem from '../components/NewsItem'
 
@@ -11,11 +11,14 @@ import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
   return (
-    <View>
-      <NewsItem title="Hello News" />
-      <NewsItem title="Hello News" />  
-      <NewsItem title="Hello News" />       
-    </View>    
+    <FlatList 
+      data={newsData}
+      renderItem={itemData => (
+        <View>
+          <NewsItem title={itemData.item.title} />
+        </View>
+      )} />
+
   );
 }
 
@@ -23,6 +26,31 @@ HomeScreen.navigationOptions = {
   header: null,
 };
 
+/**
+ * This is mock placeholder news data
+ */
+const newsData = [
+  {
+    id: '1',
+    title: "PAWS Day",
+  }, 
+  {
+    id: '2',
+    title: "Commander's Call",
+  },
+  {
+    id: '3',
+    title: "Data Burst",
+  },
+  {
+    id: '4',
+    title: "Shirts Notes",
+  },
+  {
+    id: '5',
+    title: "Another item",
+  },
+];
 
 const styles = StyleSheet.create({
   container: {
