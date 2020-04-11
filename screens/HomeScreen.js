@@ -12,22 +12,31 @@ import NewsItemScreen from './NewsItemScreen';
 
 
 
-export default function HomeScreen(props) {
+export default function HomeScreen({navigation}) {
  // console.log(props);
+  
   return (
     
     <FlatList 
       data={newsData}
       renderItem={itemData => (
-         <NewsItem goTo={() => { }} title={itemData.item.title} />
+         <NewsItem 
+            goTo={() => { navigation.navigate('NewsItem',  { title: itemData.item.title, story: itemData.item });}} 
+            title={itemData.item.title} />
       )} />
 
   );
 }
 
 
-HomeScreen.navigationOptions = {
-  header: null,
+// HomeScreen.navigationOptions = {
+//   header: null,
+// };
+HomeScreen.navigationOptions = ({navigation}) => {
+  return {
+      title: 'Review Jobs',
+      headerRight: (<Title onPress={()=> navigation.navigate('settings')}>Settings</Title>)
+  };
 };
 
 const newsData = MockNewsData();

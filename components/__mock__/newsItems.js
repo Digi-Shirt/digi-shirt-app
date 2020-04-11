@@ -12,7 +12,7 @@
     {
       id: '1',
       title: "PAWS Day",
-      article: "This is the full text for PAWS Day"
+      article: "This is the full text for PAWS Day. \n\n This is the full text for PAWS Day. This is the full text for PAWS Day. This is the full text for PAWS Day. This is the full text for PAWS Day. This is the full text for PAWS Day. This is the full text for PAWS Day. This is the full text for PAWS Day.This is the full text for PAWS Day"
     }, 
     {
       id: '2',

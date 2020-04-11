@@ -7,7 +7,7 @@ import NewsItemScreen from '../screens/NewsItemScreen';
 
 export default function NewsItem(props) {
   return (
-    <TouchableOpacity onPress={() => {} } props={props}>
+    <TouchableOpacity onPress={() => {props.goTo();} } props={props}>
       <View style={styles.NewsItemContainer} >
         <Text style={styles.NewsText}>{props.title}</Text>
       </View>

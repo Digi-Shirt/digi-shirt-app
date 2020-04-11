@@ -54,7 +54,7 @@ export default function App(props) {
         <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
           <Stack.Navigator>
             <Stack.Screen name="Root" component={BottomTabNavigator} />
-            <Stack.Screen name="NewsItem" component={NewsItemScreen} />
+            <Stack.Screen name="NewsItem" component={NewsItemScreen} options={({ route }) => ({ title: route.params.title })} />
             <Stack.Screen name="Home" component={HomeScreen} />
           </Stack.Navigator>
         </NavigationContainer>
