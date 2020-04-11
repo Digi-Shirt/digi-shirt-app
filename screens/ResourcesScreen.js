@@ -4,12 +4,16 @@
 * TODO:  
 */
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 
-export default function ResourceCategoriesScreen() {
+
+
+
+export default function ResourceScreen() {
     return (
         <View>
-            <Text>This is a stub for Resource Categories.</Text>
+            <Text>This is a stub for Resources</Text>
         </View>
     );
 }
+
