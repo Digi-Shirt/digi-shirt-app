@@ -1,15 +1,22 @@
 import * as React from 'react';
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
+import { StackActions } from '@react-navigation/native';
+import NewsItemScreen from '../screens/NewsItemScreen';
 
 
 
 export default function NewsItem(props) {
   return (
-    <View style={styles.NewsItemContainer}>
-      <Text style={styles.NewsText}>{props.title}</Text>
-    </View>
+    <TouchableOpacity onPress={() => {} } props={props}>
+      <View style={styles.NewsItemContainer} >
+        <Text style={styles.NewsText}>{props.title}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
+
+
+
 
 const styles = StyleSheet.create({
     NewsItemContainer: {

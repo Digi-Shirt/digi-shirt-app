@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList, ShadowPropTypesIOS } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import NewsItem from '../components/NewsItem'
 
@@ -8,21 +8,23 @@ import NewsItem from '../components/NewsItem'
 import MockNewsData from '../components/__mock__/newsItems';
 // Import fonts
 import { MonoText } from '../components/StyledText';
+import NewsItemScreen from './NewsItemScreen';
 
 
 
-export default function HomeScreen() {
+export default function HomeScreen(props) {
+ // console.log(props);
   return (
+    
     <FlatList 
       data={newsData}
       renderItem={itemData => (
-        <View>
-          <NewsItem title={itemData.item.title} />
-        </View>
+         <NewsItem goTo={() => { }} title={itemData.item.title} />
       )} />
 
   );
 }
+
 
 HomeScreen.navigationOptions = {
   header: null,
