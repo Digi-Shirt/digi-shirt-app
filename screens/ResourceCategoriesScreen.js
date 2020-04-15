@@ -7,14 +7,16 @@ import ResourceCategory from '../components/ResourceCategory';
 //import the test data
 import MockResourceCategories from '../components/__mock__/resourceCategories';
 
-export default function ResourceCategoriesScreen() {
+export default function ResourceCategoriesScreen({navigation}) {
     return (
         <FlatList 
         data={resourceCategories}
         renderItem={itemData => (
           <View>
-            <ResourceCategory title={itemData.item.title} />
-          </View>
+            <ResourceCategory 
+                goTo={() => {navigation.navigate('ResourceCategory')}}
+                title={itemData.item.title} />
+            </View>
         )} />
     );
 }

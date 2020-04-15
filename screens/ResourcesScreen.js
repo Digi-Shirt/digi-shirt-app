@@ -1,19 +1,29 @@
 /**
-* TODO: Create category component
-* TODO: Create logic to iterate over category object
-* TODO:  
+* Screen which displays the resources of a given category 
 */
+
 import * as React from 'react';
 import { View, Text, FlatList } from 'react-native';
+
+// Custom Components
+import ResourceCategory from '../components/ResourceCategory';
+
+//import the test data
+import MockResources from '../components/__mock__/resources';
 
 
 
 
 export default function ResourceScreen() {
+    const resourceTitle = MockResources.categoryName;
     return (
-        <View>
-            <Text>This is a stub for Resources</Text>
-        </View>
-    );
+        <FlatList 
+            data={MockResources.resources}
+            renderItem={itemData => (
+                <View>
+                    <Text>{itemData.item.resources}</Text>
+                </View>
+            )}
+        />
+    )
 }
-

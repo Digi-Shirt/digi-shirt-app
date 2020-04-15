@@ -6,6 +6,8 @@ import NewsItem from '../components/NewsItem'
 
 // Test data
 import MockNewsData from '../components/__mock__/newsItems';
+const newsData = MockNewsData();
+
 // Import fonts
 import { MonoText } from '../components/StyledText';
 import NewsItemScreen from './NewsItemScreen';
@@ -29,17 +31,17 @@ export default function HomeScreen({navigation}) {
 }
 
 
-// HomeScreen.navigationOptions = {
-//   header: null,
+//  HomeScreen.navigationOptions = {
+//    header: null,
 // };
-HomeScreen.navigationOptions = ({navigation}) => {
-  return {
-      title: 'Review Jobs',
-      headerRight: (<Title onPress={()=> navigation.navigate('settings')}>Settings</Title>)
-  };
-};
+// HomeScreen.navigationOptions = ({navigation}) => {
+//   return {
+//       title: 'Review Jobs',
+//       headerRight: (<Title onPress={()=> navigation.navigate('settings')}>Settings</Title>)
+//   };
+// };
 
-const newsData = MockNewsData();
+
 
 const styles = StyleSheet.create({
   container: {
