@@ -5,7 +5,7 @@ import { View, Text, FlatList } from 'react-native';
 import ResourceCategory from '../components/ResourceCategory';
 
 //import the test data
-import MockResourceCategories from '../components/__mock__/resourceCategories';
+import MockResourceCategories from '../components/__mock__/resources';
 
 export default function ResourceCategoriesScreen({navigation}) {
     return (
@@ -14,7 +14,9 @@ export default function ResourceCategoriesScreen({navigation}) {
         renderItem={itemData => (
           <View>
             <ResourceCategory 
-                goTo={() => {navigation.navigate('ResourceCategory')}}
+                goTo={() => {navigation.navigate('ResourceCategory', 
+                                                 { title: itemData.item.title, 
+                                                   resourceCategory: itemData.item })}}
                 title={itemData.item.title} />
             </View>
         )} />
