@@ -15,18 +15,24 @@
       resources: [
         {
           id: '1',
-          title: "MH res 1",
-          article: "Some details about Resource 1. \n Maybe a contact number \n and an email"
+          name: "MH res 1",
+          details: "This is a description of a service", 
+          email: ["email1@email.com", "email2@email2.com"],
+          phone: ["123456789"],
         }, 
         {
           id: '2',
-          title: "Resource 2",
-          article: "This is the full text for Commander's Call"
+          name: "Resource 2",
+          details: "This is the full text for Commander's Call",
+          email: ["email1@email.com", "email2@email2.com"],
+          phone: ["123456789"],
         },
         {
           id: '3',
-          title: "Resource 3",
-          article: "This is the full text for Data Burst"
+          name: "Resource 3",
+          details: "This is the full text for Data Burst",
+          email: ["email1@email.com", "email2@email2.com"],
+          phone: ["123456789"],
         },
       ],
     }, 
@@ -36,19 +42,22 @@
       resources: [
         {
           id: '1',
-          title: "SA res 1",
-          article: "Some details about Resource 1. \n Maybe a contact number \n and an email"
-        }, 
+          name: "SA res 1",
+          details: "This is the full text for Data Burst",
+          email: ["email1@email.com", "email2@email2.com"],
+          phone: ["123456789"],        }, 
         {
           id: '2',
-          title: "SA res 2",
-          article: "This is the full text for Commander's Call"
-        },
+          name: "SA res 2",
+          details: "This is the full text for Data Burst",
+          email: ["email1@email.com", "email2@email2.com"],
+          phone: ["123456789"],        },
         {
           id: '3',
-          title: "Resource 3",
-          article: "This is the full text for Data Burst"
-        },
+          name: "Resource 3",
+          details: "This is the full text for Data Burst",
+          email: ["email1@email.com", "email2@email2.com"],
+          phone: ["123456789"],        },
       ],
     },
     {
