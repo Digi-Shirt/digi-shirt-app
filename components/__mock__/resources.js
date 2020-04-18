@@ -18,7 +18,7 @@
           name: "MH res 1",
           details: "This is a description of a service", 
           email: ["email1@email.com", "email2@email2.com"],
-          phone: ["123456789"],
+          phone: ["123456789", "123121234"],
         }, 
         {
           id: '2',

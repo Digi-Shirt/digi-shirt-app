@@ -1,5 +1,5 @@
 /**
- * This is an Atom for displaying phone numbers in a consistant manner
+ * This is an Atom for displaying email contacts in a consistant manner
  */
 
 import * as React from 'react';
@@ -9,28 +9,28 @@ import { Ionicons } from '@expo/vector-icons';
 export default function PhoneNumber(props) {
     
   return (
-  <View style={styles.phoneContainer}>
+  <View style={styles.emailContainer}>
     <Ionicons
-      name="md-call"
+      name="md-mail"
       size={24}
       color='#FFF'
-      style={styles.phoneIcon}
-    /><Text {...props} style={styles.number} />
+      style={styles.emailIcon}
+    /><Text {...props} style={styles.email} />
   </View>
   );
     
 }
 
 const styles = StyleSheet.create({
-  phoneContainer: {
+  emailContainer: {
     flex: 1,
     flexDirection: 'row',
     textAlignVertical: 'center'
   },
-  phoneIcon: {
+  emailIcon: {
     marginRight: 10,
   },
-  number: {
+  email: {
     fontSize: 20,
     color: '#FFF',
   }
