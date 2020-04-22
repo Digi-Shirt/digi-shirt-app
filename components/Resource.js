@@ -13,14 +13,16 @@ import EmailAddress from '../atoms/EmailAddress';
 
 export default function Resource(props) {
   const resource = props.resource;
+  
+  
 
   return (
     <View style={styles.ResourceContainer} >
       <Text style={styles.ResourceName}>{resource.name}</Text>
       <View>
-        <Text style={styles.ResourceDetails}>{resource.details}</Text>
-        {resource.phone.map(p => <PhoneNumber key={p} >{p}</PhoneNumber>)}
-        {resource.email.map(p => <EmailAddress key={p} >{p}</EmailAddress>)}
+        <Text style={styles.ResourceDetails}>{resource.details }</Text>
+        {resource.phone ? resource.phone.map(p => <PhoneNumber key={p} >{p}</PhoneNumber>) : null}
+        {resource.email ? resource.email.map(p => <EmailAddress key={p} >{p}</EmailAddress>) : null}
       </View>  
     </View>
   );

@@ -9,10 +9,10 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/digi-shirt-icon.png",
     "scheme": "myapp",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/digi-shirt-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,6 +24,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Product demo of Digi-Shirt.  ",
+    "githubUrl": "https://github.com/Digi-Shirt/digi-shirt-app"
   }
 }

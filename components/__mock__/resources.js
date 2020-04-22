@@ -42,22 +42,17 @@
       resources: [
         {
           id: '1',
-          name: "SA res 1",
-          details: "This is the full text for Data Burst",
-          email: ["email1@email.com", "email2@email2.com"],
-          phone: ["123456789"],        }, 
+          name: "JBSA Sexual Assault Response Hotline",
+          details: "Serving Army, Navy & Air Force",
+          phone: ["210-808-7272 (SARC)"],        }, 
         {
           id: '2',
-          name: "SA res 2",
-          details: "This is the full text for Data Burst",
-          email: ["email1@email.com", "email2@email2.com"],
-          phone: ["123456789"],        },
+          name: "BAMC Emergency Room",
+          phone: ["1210-916-0808"],        },
         {
           id: '3',
-          name: "Resource 3",
-          details: "This is the full text for Data Burst",
-          email: ["email1@email.com", "email2@email2.com"],
-          phone: ["123456789"],        },
+          name: "Rape Crisis Center Hotline",
+          phone: ["210-349-7273"],        },
       ],
     },
     {
