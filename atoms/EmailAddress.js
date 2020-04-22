@@ -1,5 +1,5 @@
 /**
- * This is an Atom for displaying email contacts in a consistant manner
+ * This is an Atom for displaying email contacts in a consistent manner
  */
 
 import * as React from 'react';
