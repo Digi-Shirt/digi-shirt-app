@@ -12,6 +12,18 @@ import NewsItemScreen from './screens/NewsItemScreen';
 import HomeScreen from './screens/HomeScreen';
 import ResourceCategoryScreen from './screens/ResourcesCategoryScreen';
 
+//import db helper functions
+import { init } from './helpers/db';
+
+//attempt to initialize the database
+init().then(() => {
+  console.log('Initialized local database');
+})
+.catch((err) => {
+  console.log('Initializing local db failed.');
+  console.log(err);
+});
+
 const Stack = createStackNavigator();
 
 export default function App(props) {
