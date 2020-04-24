@@ -12,6 +12,16 @@ import NewsItemScreen from './screens/NewsItemScreen';
 import HomeScreen from './screens/HomeScreen';
 import ResourceCategoryScreen from './screens/ResourcesCategoryScreen';
 
+//import redux store
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import settingsReducer from './store/reducers/settings';
+
+const rootReducer = combineReducers({
+  settings: settingsReducer,
+});
+const store = createStore(rootReducer);
+
 //import db helper functions
 import { init } from './helpers/db';
 
@@ -62,6 +72,7 @@ export default function App(props) {
     return null;
   } else {
     return (
+      <Provider store={store}>
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
@@ -73,6 +84,7 @@ export default function App(props) {
           </Stack.Navigator>
         </NavigationContainer>
       </View>
+      </Provider>
     );
   }
 }
