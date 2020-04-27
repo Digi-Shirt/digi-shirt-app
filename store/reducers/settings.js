@@ -7,6 +7,7 @@ const initialState = {
 const settingsReducer = (state = initialState, action) => {
     switch(action.type){
         case CHANGE_INVITE_CODE:
+            console.log("dispatched change_invite_code reducer changing invite coded to: " + action.inviteCode);
             return {...state, inviteCode: action.inviteCode}
         case UPDATE_SETTINGS:
             const settings = action.settings; 

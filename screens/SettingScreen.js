@@ -1,34 +1,36 @@
 import React, {useEffect, useCallback} from 'react';
 import { StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
+import { useState } from 'react';
 
 import { changeInviteCode, updateSettings } from '../store/actions/settings';
 
 export default function ContactScreen(){
+    
+    // get all of the settings from the store with useSelector,
+    // use hooks to capture changes to the settings
+    const [settings, setSettings] = useState(useSelector(state => state.settings));
+    const [inviteCode, setInviteCode] = useState(settings.inviteCode);
+    
+    //create a callback function to have dispatched when save button is pressed
     const dispatch = useDispatch();
+    const saveSettings = useCallback(() => {
+        dispatch(changeInviteCode(inviteCode))
+    }, [dispatch, inviteCode]);
 
-    //  const changeInviteCodeHandler = useCallback(() => {
-    //      dispatch(changeInviteCode(inviteCode))
-    //  }, [dispatch, inviteCode]);
-
-    const settings = useSelector(state => state.settings);
-    console.log(settings.inviteCode);
-
-    const SaveHandler = () => {
-        console.log("Save pressed");
-    };
 
     return(
         <View style={styles.container}>
             <Text style={styles.h2}>CHANGE YOUR INVITE CODE </Text>
             <Text style={styles.info} >This code is provided by your squadron.</Text>
-            <TextInput style={styles.input}
+            <TextInput 
+                style={styles.input}            
                 placeholder='Invite Code'
                 defaultValue={settings.inviteCode}
-                onChangeText={code => {console.log(code)}}
+                onChangeText={code => {setInviteCode(code)}}
                 
             />
-            <Button title="Save" onPress={SaveHandler()} />
+            <Button title="Save" onPress={saveSettings} />
         </View>
     );
 }
