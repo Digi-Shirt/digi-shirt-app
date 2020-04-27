@@ -5,6 +5,7 @@ import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
@@ -34,6 +35,7 @@ init().then(() => {
   console.log(err);
 });
 
+const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 export default function App(props) {
@@ -82,6 +84,7 @@ export default function App(props) {
             <Stack.Screen name="ResourceCategory" component={ResourceCategoryScreen} options={({ route }) => ({ title: route.params.title })} />
             <Stack.Screen name="Home" component={HomeScreen} />
           </Stack.Navigator>
+          
         </NavigationContainer>
       </View>
       </Provider>
