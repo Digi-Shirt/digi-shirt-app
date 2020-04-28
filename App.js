@@ -17,9 +17,11 @@ import ResourceCategoryScreen from './screens/ResourcesCategoryScreen';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import settingsReducer from './store/reducers/settings';
+import newsItemsReducer from './store/reducers/newsItems';
 
 const rootReducer = combineReducers({
   settings: settingsReducer,
+  newsItems: newsItemsReducer,
 });
 const store = createStore(rootReducer);
 
