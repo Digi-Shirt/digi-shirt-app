@@ -9,7 +9,7 @@ export default function ContactScreen(){
     
     // get all of the settings from the store with useSelector,
     // use hooks to capture changes to the settings
-    const [settings, setSettings] = useState(useSelector(state => state.settings));
+    const settings = useSelector(state => state.settings);
     const [inviteCode, setInviteCode] = useState(settings.inviteCode);
     
     //create a callback function to have dispatched when save button is pressed
