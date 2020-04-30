@@ -2,8 +2,15 @@
  * Action definitions to be used by Redux dispatcher
  */
 
-export const UPDATE_NEWS_ITEMS = 'UPDATE_NEWS_ITEMS';
+export const SET_NEWS_ITEMS = 'SET_NEWS_ITEMS';
+import ENV from '../../constants/Environment';
 
-export const updateNewsItems = () => {
-    return { type: UPDATE_NEWS_ITEMS }
-}
+export const fetchNewsItems = () => {
+    return async dispatch => {
+        const url = ENV.API_URL + 'news-items?unit.invite_code=BYTEBACK';
+        const response = await fetch(url);
+        const resData = await response.json();
+    
+        dispatch({ type: SET_NEWS_ITEMS, newsItems: resData });
+    };
+  };

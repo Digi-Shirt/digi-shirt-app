@@ -1,45 +1,36 @@
 import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList, ShadowPropTypesIOS } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import NewsItem from '../components/NewsItem'
 
 import ENV from '../constants/Environment';
-// Test data
-//import MockNewsData from '../components/__mock__/newsItems';
-//const newsData = MockNewsData();
+
+
+import * as newsItemActions from '../store/actions/newsItems';
 
 export default function HomeScreen({navigation}) {
 
   // Hooks setup for this component
   const[isLoading, setLoadingStatus] = useState(true);
-  const[newsItems, setNewsItems] = useState(useSelector(state => state.newsItems.newsItems));
-  console.log(newsItems);
+  const[requestDispatched, setRequestDispatched] = useState(false);
+  const newsItems = useSelector(state => state.newsItems.newsItems);
+  const dispatch = useDispatch();
   
   // This attempts to Load data from dev API
-  const url = ENV.API_URL + 'news-items?unit.invite_code=BYTEBACK';
-  console.log(url);
-  /*
-  fetch(url)
-    .then((response) => response.json())
-    .then((responseJson) => {
-        setLoadingStatus(false);
-        setNewsItems(responseJson);
-        console.log(responseJson);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-    */
   
-    
+  useEffect(() => {
+    dispatch(newsItemActions.fetchNewsItems());
+  }, [dispatch]);
+
+  
   return (
     
     // Data uses either the API data or Stored data
-    <FlatList 
+    <FlatList
       data={newsItems}
+      keyExtractor={item => item.id}
       renderItem={itemData => (
          <NewsItem 
             goTo={() => { navigation.navigate('NewsItem',  

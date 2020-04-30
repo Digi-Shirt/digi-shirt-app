@@ -4,7 +4,7 @@
 
 import * as SQLite from 'expo-sqlite';
 
-const db = SQLite.openDatabase('settings.db');
+const db = SQLite.openDatabase("settings.db");
 
 
 /**

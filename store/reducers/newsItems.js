@@ -1,13 +1,13 @@
 /**
  * This is a reducer for news Items
  */
-import { UPDATE_NEWS_ITEMS } from '../actions/newsItems';
+import { UPDATE_NEWS_ITEMS, SET_NEWS_ITEMS } from '../actions/newsItems';
 import MockNewsData from '../../components/__mock__/newsItems';
+
 
 //TODO: replace with accessing local SQLite database for initial state
 // Test data
-//import MockNewsData from '../components/__mock__/newsItems';
-//const newsData =
+
 const initialState =  {
     newsItems: [
         {
@@ -30,13 +30,15 @@ const initialState =  {
 
 const newsItemsReducer = (state = initialState, action) => {
     switch(action.type){
-        case UPDATE_NEWS_ITEMS:
-            //access database
-            //return the updated state
+        case SET_NEWS_ITEMS:
+            state.newsItems = action.newsItems;
             return state;
         default:
             return state;
     }
 }
+
+
+
 
 export default newsItemsReducer;

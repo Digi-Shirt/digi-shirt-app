@@ -14,7 +14,8 @@ import HomeScreen from './screens/HomeScreen';
 import ResourceCategoryScreen from './screens/ResourcesCategoryScreen';
 
 //import redux store
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import settingsReducer from './store/reducers/settings';
 import newsItemsReducer from './store/reducers/newsItems';
@@ -23,7 +24,7 @@ const rootReducer = combineReducers({
   settings: settingsReducer,
   newsItems: newsItemsReducer,
 });
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 //import db helper functions
 import { init } from './helpers/db';
