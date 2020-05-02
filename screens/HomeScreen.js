@@ -4,6 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList, ShadowPropTypesIOS } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import NewsItem from '../components/NewsItem'
+import Loading from '../atoms/loading';
+import Status from '../atoms/status';
 
 import ENV from '../constants/Environment';
 
@@ -13,7 +15,8 @@ import * as newsItemActions from '../store/actions/newsItems';
 export default function HomeScreen({navigation}) {
 
   // Hooks setup for this component
-  const[isLoading, setLoadingStatus] = useState(true);
+  const[isLoading, setIsLoading] = useState(true);
+  const[status, setStatus] = useState("");
   const[requestDispatched, setRequestDispatched] = useState(false);
   const newsItems = useSelector(state => state.newsItems.newsItems);
   const dispatch = useDispatch();
@@ -21,14 +24,30 @@ export default function HomeScreen({navigation}) {
   // This attempts to Load data from dev API
   
   useEffect(() => {
-    dispatch(newsItemActions.fetchNewsItems());
+    setIsLoading(true);
+    setStatus("Loading...");
+    dispatch(newsItemActions.fetchNewsItems())
+    .then(setIsLoading(true))
+    .catch( (error) => {
+      setStatus(error.message);
+    });
   }, [dispatch]);
 
   
+  if(!isLoading && newsItems.length === 0){
+    return (
+      <View>
+        <Text>There are no news items available.</Text>
+      </View>
+    );
+  }
+
   return (
     
     // Data uses either the API data or Stored data
-    <FlatList
+    <View style={styles.listContainer}>
+    <FlatList 
+      style={styles.flatList}
       data={newsItems}
       keyExtractor={item => item.id}
       renderItem={itemData => (
@@ -38,9 +57,17 @@ export default function HomeScreen({navigation}) {
           }} 
             title={itemData.item.title} />
       )} />
-
+      {isLoading === true &&  <Status>{status}</Status>}
+    </View>
   );
 }
 
+const styles = StyleSheet.create({
+  listContainer: {
+    flex: 1,
+    flexDirection: "column",
+  },
+
+})
 
 
