@@ -3,6 +3,9 @@ export const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
 
 
 export const changeInviteCode = (value) => {
+
+    
+
     return { type: CHANGE_INVITE_CODE, inviteCode: value };
 }
 

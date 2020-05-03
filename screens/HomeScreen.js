@@ -15,7 +15,8 @@ import * as newsItemActions from '../store/actions/newsItems';
 export default function HomeScreen({navigation}) {
 
   // Hooks setup for this component
-  const[isLoading, setIsLoading] = useState(true);
+  const[isLoading, setIsLoading] = useState(false);
+  const[isRefreshing, setIsRefreshing] = useState(false);
   const[status, setStatus] = useState("");
   const[requestDispatched, setRequestDispatched] = useState(false);
   const newsItems = useSelector(state => state.newsItems.newsItems);
@@ -23,16 +24,20 @@ export default function HomeScreen({navigation}) {
   
   // This attempts to Load data from dev API
   
-  useEffect(() => {
+  useEffect(() => {    loadNewsItems();
+
+  }, [dispatch]);
+
+  const loadNewsItems = () => {
     setIsLoading(true);
     setStatus("Loading...");
     dispatch(newsItemActions.fetchNewsItems())
-    .then(setIsLoading(true))
+    .then(setIsLoading(false))
     .catch( (error) => {
       setStatus(error.message);
     });
-  }, [dispatch]);
-
+  };
+  
   
   if(!isLoading && newsItems.length === 0){
     return (
@@ -47,6 +52,8 @@ export default function HomeScreen({navigation}) {
     // Data uses either the API data or Stored data
     <View style={styles.listContainer}>
     <FlatList 
+      onRefresh={loadNewsItems}
+      refreshing={isRefreshing}
       style={styles.flatList}
       data={newsItems}
       keyExtractor={item => item.id}
@@ -57,7 +64,7 @@ export default function HomeScreen({navigation}) {
           }} 
             title={itemData.item.title} />
       )} />
-      {isLoading === true &&  <Status>{status}</Status>}
+      {status &&  <Status>{status}</Status>}
     </View>
   );
 }
