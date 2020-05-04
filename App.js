@@ -15,28 +15,58 @@ import ResourceCategoryScreen from './screens/ResourcesCategoryScreen';
 
 //import redux store
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import ReduxThunk from 'redux-thunk';
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 import settingsReducer from './store/reducers/settings';
 import newsItemsReducer from './store/reducers/newsItems';
+import { createLogger } from 'redux-logger';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
+
+// Redux Persist Config
+// Middleware: Redux Persist Config
+const persistConfig = {
+  // Root
+  key: "root",
+  // Storage Method (React Native)
+  storage: storage,
+  // Whitelist (Save Specific Reducers)
+  whitelist: [
+    'settings',
+    'newsItems',
+  ],
+
+};
 
 const rootReducer = combineReducers({
   settings: settingsReducer,
   newsItems: newsItemsReducer,
 });
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = createStore(
+  persistedReducer,
+    applyMiddleware(
+      ReduxThunk,
+      createLogger()
+    ),
+  );
+
+const persistor = persistStore(store); 
 
 //import db helper functions
-import { init } from './helpers/db';
+// import { init } from './helpers/db';
 
-//attempt to initialize the database
-init().then(() => {
-  console.log('Initialized local database');
-})
-.catch((err) => {
-  console.log('Initializing local db failed.');
-  console.log(err);
-});
+// //attempt to initialize the database
+// init().then(() => {
+//   console.log('Initialized local database');
+// })
+// .catch((err) => {
+//   console.log('Initializing local db failed.');
+//   console.log(err);
+// });
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -78,18 +108,19 @@ export default function App(props) {
   } else {
     return (
       <Provider store={store}>
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-          <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
-            <Stack.Screen name="NewsItem" component={NewsItemScreen} options={({ route }) => ({ title: route.params.title })} />
-            <Stack.Screen name="ResourceCategory" component={ResourceCategoryScreen} options={({ route }) => ({ title: route.params.title })} />
-            <Stack.Screen name="Home" component={HomeScreen} />
-          </Stack.Navigator>
-          
-        </NavigationContainer>
-      </View>
+        <PersistGate loading={null} persistor={persistor}>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
+              <Stack.Navigator>
+                <Stack.Screen name="Root" component={BottomTabNavigator} />
+                <Stack.Screen name="NewsItem" component={NewsItemScreen} options={({ route }) => ({ title: route.params.title })} />
+                <Stack.Screen name="ResourceCategory" component={ResourceCategoryScreen} options={({ route }) => ({ title: route.params.title })} />
+                <Stack.Screen name="Home" component={HomeScreen} />
+              </Stack.Navigator>  
+            </NavigationContainer>
+          </View>
+        </PersistGate>
       </Provider>
     );
   }

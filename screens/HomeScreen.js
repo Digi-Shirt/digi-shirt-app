@@ -64,7 +64,7 @@ export default function HomeScreen({navigation}) {
           }} 
             title={itemData.item.title} />
       )} />
-      {status &&  <Status>{status}</Status>}
+      {status !="" &&  <Status>{status}</Status>}
     </View>
   );
 }
