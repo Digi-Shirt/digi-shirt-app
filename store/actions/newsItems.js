@@ -6,9 +6,10 @@ export const SET_NEWS_ITEMS = 'SET_NEWS_ITEMS';
 import ENV from '../../constants/Environment';
 
 export const fetchNewsItems = () => {
+    const url = ENV.API_URL + 'news-items?unit.invite_code=BYTEBACK';
     return async dispatch => {
         try {
-            const url = ENV.API_URL + 'news-items?unit.invite_code=BYTEBACK';
+            
             const response = await fetch(url);
             
             if(!response.ok){
@@ -21,7 +22,8 @@ export const fetchNewsItems = () => {
             dispatch({ type: SET_NEWS_ITEMS, newsItems: resData });
         } catch(err) {
             // can do something here with error. 
+            console.log("problem with the url: " + url);
             throw err;
         }
     };
-  };
+  }; 

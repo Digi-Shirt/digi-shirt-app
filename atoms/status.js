@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     info: {
       paddingHorizontal: 15,
       height: 20,
-      backgroundColor: '#DDDDDD',
+      backgroundColor: '#EEE',
+      color:'#AAA'
     }
 });

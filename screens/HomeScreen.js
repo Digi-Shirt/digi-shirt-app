@@ -32,7 +32,10 @@ export default function HomeScreen({navigation}) {
     setIsLoading(true);
     setStatus("Loading...");
     dispatch(newsItemActions.fetchNewsItems())
-    .then(setIsLoading(false))
+    .then(() => {
+      setIsLoading(false);
+      setStatus("");
+    })
     .catch( (error) => {
       setStatus(error.message);
     });
@@ -56,7 +59,7 @@ export default function HomeScreen({navigation}) {
       refreshing={isRefreshing}
       style={styles.flatList}
       data={newsItems}
-      keyExtractor={item => item.id}
+     // keyExtractor={item => item.id}
       renderItem={itemData => (
          <NewsItem 
             goTo={() => { navigation.navigate('NewsItem',  
@@ -64,7 +67,7 @@ export default function HomeScreen({navigation}) {
           }} 
             title={itemData.item.title} />
       )} />
-      {status !="" &&  <Status>{status}</Status>}
+      {status !=""  &&  <Status>{status}</Status>}
     </View>
   );
 }
