@@ -4,7 +4,7 @@ import * as React from 'react';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import ContactScreen from '../screens/ContactScreen';
-import SettingsScreen from '../screens/SettingScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 import ResourceCategoriesScreen from '../screens/ResourceCategoriesScreen';
 
 const BottomTab = createBottomTabNavigator();
@@ -42,14 +42,14 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-mail" />,
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Settings"
         component={SettingsScreen}
         options={{
           title: 'Settings',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-settings" />,
         }}
-      />
+      /> */}
     </BottomTab.Navigator>
   );
 }

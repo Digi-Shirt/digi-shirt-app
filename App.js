@@ -3,15 +3,11 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import BottomTabNavigator from './navigation/BottomTabNavigator';
-import useLinking from './navigation/useLinking';
-import NewsItemScreen from './screens/NewsItemScreen';
-import HomeScreen from './screens/HomeScreen';
-import ResourceCategoryScreen from './screens/ResourcesCategoryScreen';
+
+import AppNavigator from './navigation/AppNavigator';
+//import useLinking from './navigation/useLinking';
+
 
 //import redux store
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -56,35 +52,22 @@ const store = createStore(
 
 const persistor = persistStore(store); 
 
-//import db helper functions
-// import { init } from './helpers/db';
 
-// //attempt to initialize the database
-// init().then(() => {
-//   console.log('Initialized local database');
-// })
-// .catch((err) => {
-//   console.log('Initializing local db failed.');
-//   console.log(err);
-// });
-
-const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
-  const [initialNavigationState, setInitialNavigationState] = React.useState();
-  const containerRef = React.useRef();
-  const { getInitialState } = useLinking(containerRef);
+  // const [initialNavigationState, setInitialNavigationState] = React.useState();
+  // const containerRef = React.useRef();
+  // const { getInitialState } = useLinking(containerRef);
 
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
         SplashScreen.preventAutoHide();
-
+        
         // Load our initial navigation state
-        setInitialNavigationState(await getInitialState());
+        //setInitialNavigationState(await getInitialState());
 
         // Load fonts
         await Font.loadAsync({
@@ -109,26 +92,10 @@ export default function App(props) {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <View style={styles.container}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-              <Stack.Navigator>
-                <Stack.Screen name="Root" component={BottomTabNavigator} />
-                <Stack.Screen name="NewsItem" component={NewsItemScreen} options={({ route }) => ({ title: route.params.title })} />
-                <Stack.Screen name="ResourceCategory" component={ResourceCategoryScreen} options={({ route }) => ({ title: route.params.title })} />
-                <Stack.Screen name="Home" component={HomeScreen} />
-              </Stack.Navigator>  
-            </NavigationContainer>
-          </View>
+            <AppNavigator />
         </PersistGate>
       </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});

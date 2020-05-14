@@ -1,7 +1,7 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList, ShadowPropTypesIOS } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, Button, View, FlatList, ShadowPropTypesIOS } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import NewsItem from '../components/NewsItem'
 import Loading from '../atoms/loading';
@@ -42,6 +42,7 @@ export default function HomeScreen({navigation}) {
   };
   
   
+  
   if(!isLoading && newsItems.length === 0){
     return (
       <View>
@@ -51,7 +52,6 @@ export default function HomeScreen({navigation}) {
   }
 
   return (
-    
     // Data uses either the API data or Stored data
     <View style={styles.listContainer}>
     <FlatList 
@@ -59,7 +59,7 @@ export default function HomeScreen({navigation}) {
       refreshing={isRefreshing}
       style={styles.flatList}
       data={newsItems}
-     // keyExtractor={item => item.id}
+      keyExtractor={item => item.id.toString()}
       renderItem={itemData => (
          <NewsItem 
             goTo={() => { navigation.navigate('NewsItem',  
@@ -71,6 +71,7 @@ export default function HomeScreen({navigation}) {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   listContainer: {

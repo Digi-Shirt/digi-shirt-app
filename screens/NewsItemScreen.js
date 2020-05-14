@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 
 //import the mock data
-import MockNewsItems from '../components/__mock__/newsItems';
+//import MockNewsItems from '../components/__mock__/newsItems';
 
 
-const newsItems = MockNewsItems();
+//const newsItems = MockNewsItems();
 
 export default function NewsItemScreen(props) {
     const story = props.route.params.story;
