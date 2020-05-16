@@ -14,11 +14,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
-import settingsReducer from './store/reducers/settings';
-import newsItemsReducer from './store/reducers/newsItems';
 import { createLogger } from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'
+import storage from 'redux-persist/lib/storage';
+
+// Load reducers
+import settingsReducer from './store/reducers/settings';
+import newsItemsReducer from './store/reducers/newsItems';
+import resourceCategoriesReducer from './store/reducers/resourceCategories';
 
 // Redux Persist Config
 // Middleware: Redux Persist Config
@@ -31,6 +34,7 @@ const persistConfig = {
   whitelist: [
     'settings',
     'newsItems',
+    'resourceCategories',
   ],
 
 };
@@ -38,6 +42,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   settings: settingsReducer,
   newsItems: newsItemsReducer,
+  resourceCategories: resourceCategoriesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -46,7 +51,7 @@ const store = createStore(
   persistedReducer,
     applyMiddleware(
       ReduxThunk,
-      createLogger()
+     // createLogger()
     ),
   );
 

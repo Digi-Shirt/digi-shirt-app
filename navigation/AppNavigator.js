@@ -18,9 +18,6 @@ import SettingsScreen from '../screens/SettingsScreen';
 import ResourceCategoryScreen from '../screens/ResourcesCategoryScreen';
 
 
-
-
-
 const Stack = createStackNavigator();
 
 export const StackNav = ({ navigation, route }) => {
@@ -32,7 +29,6 @@ export const StackNav = ({ navigation, route }) => {
             <Stack.Screen name="Contact" component={ContactScreen} />
             <Stack.Screen name="ResourceCategory" component={ResourceCategoryScreen} />
             <Stack.Screen name="NewsItem" component={NewsItemScreen} />
-
         </Stack.Navigator>
     );
     

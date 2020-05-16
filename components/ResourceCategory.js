@@ -7,7 +7,7 @@ export default function ResourceCategory(props) {
   return (
     <TouchableOpacity onPress={() => {props.goTo();} } props={props}>
       <View style={styles.NewsItemContainer}>
-        <Text style={styles.NewsText}>{props.title}</Text>
+        <Text style={styles.NewsText}>{props.name}</Text>
       </View>
     </TouchableOpacity>
   );

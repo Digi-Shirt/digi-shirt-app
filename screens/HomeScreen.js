@@ -24,8 +24,8 @@ export default function HomeScreen({navigation}) {
   
   // This attempts to Load data from dev API
   
-  useEffect(() => {    loadNewsItems();
-
+  useEffect(() => {    
+    loadNewsItems();
   }, [dispatch]);
 
   const loadNewsItems = () => {

@@ -4,27 +4,9 @@
 import { UPDATE_NEWS_ITEMS, SET_NEWS_ITEMS } from '../actions/newsItems';
 import MockNewsData from '../../components/__mock__/newsItems';
 
-
-//TODO: replace with accessing local SQLite database for initial state
-// Test data
-
+//TODO:  make this pull the hydrated redux instead of some fake news
 const initialState =  {
     newsItems: [
-        {
-          id: '1',
-          title: "PAWS Day",
-          article: "This is the full text for PAWS Day. \n\n This is the full text for PAWS Day. This is the full text for PAWS Day. This is the full text for PAWS Day. This is the full text for PAWS Day. This is the full text for PAWS Day. This is the full text for PAWS Day. This is the full text for PAWS Day.This is the full text for PAWS Day"
-        }, 
-        {
-          id: '2',
-          title: "Commander's Call",
-          article: "This is the full text for Commander's Call"
-        },
-        {
-          id: '3',
-          title: "Data Burst",
-          article: "This is the full text for Data Burst"
-        },
     ]
 }
 
