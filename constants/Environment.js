@@ -3,6 +3,6 @@
  */
 
 export default {
-    API_URL: 'http://shirt.services/',
+    API_URL: 'http://dev.shirt.services/',
 
  }

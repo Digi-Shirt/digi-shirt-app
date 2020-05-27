@@ -22,6 +22,7 @@ import storage from 'redux-persist/lib/storage';
 import settingsReducer from './store/reducers/settings';
 import newsItemsReducer from './store/reducers/newsItems';
 import resourceCategoriesReducer from './store/reducers/resourceCategories';
+import contactsReducer from './store/reducers/contacts';
 
 // Redux Persist Config
 // Middleware: Redux Persist Config
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
   settings: settingsReducer,
   newsItems: newsItemsReducer,
   resourceCategories: resourceCategoriesReducer,
+  unitContacts: contactsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
