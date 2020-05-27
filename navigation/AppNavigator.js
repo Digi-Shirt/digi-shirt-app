@@ -23,6 +23,24 @@ const Stack = createStackNavigator();
 export const StackNav = ({ navigation, route }) => {
     //const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
     //console.log(routeName);
+
+
+
+    function getHeaderTitle(route) {
+        const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
+      
+        switch (routeName) {
+          case 'Contact':
+            return 'Contact';
+          case 'Home':
+            return 'News Feed';
+          case 'Resources':
+            return 'Resources';
+          case 'Settings':
+              return 'Settings';
+        }
+    }
+    
     return(
         <Stack.Navigator>
             <Stack.Screen name="Drawer" component={DrawerNav} />
@@ -32,6 +50,8 @@ export const StackNav = ({ navigation, route }) => {
         </Stack.Navigator>
     );
     
+
+
 }
 
 
@@ -46,11 +66,12 @@ export const DrawerNav =({navigation, route}) => {
     );
 };
 
-const AppNavigator = props => {
+const AppNavigator = ({navigation, route}) => {
 
     const [initialNavigationState, setInitialNavigationState] = React.useState();
     const containerRef = React.useRef();
     const { getInitialState } = useLinking(containerRef);
+
 
     return (
         <View style={styles.container}>

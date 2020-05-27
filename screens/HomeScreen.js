@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, Button, View, FlatList, ShadowPropTypesIOS } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -21,11 +21,12 @@ export default function HomeScreen({navigation}) {
   const[requestDispatched, setRequestDispatched] = useState(false);
   const newsItems = useSelector(state => state.newsItems.newsItems);
   const dispatch = useDispatch();
-  
+
+  navigation.setOptions({headerTitle: 'derp'});
   // This attempts to Load data from dev API
   
-  useEffect(() => {    
-    loadNewsItems();
+  useEffect(() => {
+     loadNewsItems();
   }, [dispatch]);
 
   const loadNewsItems = () => {
@@ -41,7 +42,7 @@ export default function HomeScreen({navigation}) {
     });
   };
   
-  
+ 
   
   if(!isLoading && newsItems.length === 0){
     return (
