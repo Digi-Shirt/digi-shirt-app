@@ -22,7 +22,7 @@ export default function HomeScreen({navigation}) {
   const newsItems = useSelector(state => state.newsItems.newsItems);
   const dispatch = useDispatch();
 
-  navigation.setOptions({headerTitle: 'derp'});
+  //navigation.setOptions({headerTitle: 'derp'});
   // This attempts to Load data from dev API
   
   useEffect(() => {

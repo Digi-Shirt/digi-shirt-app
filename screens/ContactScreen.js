@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import * as contactsActions from '../store/actions/contacts';
 import {Picker} from '@react-native-community/picker';
+import { set } from 'react-native-reanimated';
 
 export default function ContactScreen({navigation}){
 
@@ -52,24 +53,31 @@ export default function ContactScreen({navigation}){
                     onValueChange={(itemValue, itemIndex) => 
                         {
                             //console.log(itemValue);
-                            console.log("made a selection.");
-                            setContact(itemValue);
+                            
+                            contacts.map(contactItem => {
+                                if(contactItem.id == itemValue){
+                                    setContact(contactItem);
+                                }
+                            })
+                           // setContact(itemValue);
                         }
                     }
                 >
                     <Picker.Item label="Choose a contact" value={null} />
-                    <Picker.Item label="Shirt" value="shirt" />
-                    <Picker.Item label="Commander" value="commander" />
-                    <Picker.Item label="Chief" value="chief" />
+                    {
+                        contacts.map(contactItem => {
+                            return <Picker.Item key={contactItem.id.toString()} label={contactItem.name + " (" + contactItem.role + ")"} value={contactItem.id} />
+                        })
+
+                    }
                 </Picker>
             </View>
         );
     }
     
-
     return(
         <View style={styles.container}>
-            <Text style={styles.addressee} >To: {contact}</Text>
+            <Text style={styles.addressee} >To: {contact.name}</Text>
             <TextInput 
                 name='from'
                 style={styles.input} 
