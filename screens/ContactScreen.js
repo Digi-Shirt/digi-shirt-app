@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import * as contactsActions from '../store/actions/contacts';
 import {Picker} from '@react-native-community/picker';
 import { set } from 'react-native-reanimated';
+import ENV from '../constants/Environment';
 
 export default function ContactScreen({navigation}){
 
@@ -14,6 +15,9 @@ export default function ContactScreen({navigation}){
     const[requestDispatched, setRequestDispatched] = useState(false);
     const contacts = useSelector(state => state.unitContacts.unitContacts);
     const[contact, setContact] = useState(null);
+    const[message, setMessage] = useState("");
+    const[from, setFrom] = useState("");
+    const[messageSent, setMessageSent] = useState(false);
 
     
     const dispatch = useDispatch();
@@ -38,6 +42,35 @@ export default function ContactScreen({navigation}){
      const cancelButtonHandler = () => {
          setContact(null);
      };
+
+     const sendButtonHandler = () => {
+        //put the message together...
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        
+        var raw = JSON.stringify({
+            "id":null,
+            "from": from,
+            "text": message,
+            "to": contact.id
+        });
+        //console.log(raw);
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+        
+        fetch(ENV.API_URL + "messages", requestOptions)
+          .then(response => {
+              if(response.ok){
+                  setMessageSent(true);
+              }
+          })
+          .catch(error => console.log('error', error));
+                
+    }
     
 
     console.log(contacts);
@@ -75,39 +108,59 @@ export default function ContactScreen({navigation}){
         );
     }
     
-    return(
-        <View style={styles.container}>
-            <Text style={styles.addressee} >To: {contact.name}</Text>
-            <TextInput 
-                name='from'
-                style={styles.input} 
-                placeholder='Name (Not required)'
-                placeholderTextColor='#CCC'
-            />
-            <TextInput 
-                name='message'
-                style={styles.input}
-                multiline
-                numberOfLines={4}
-                placeholder='Message'
-                placeholderTextColor='#CCC'
-                textAlignVertical='top'
-            />
-            <View style={styles.buttons}>
-                <Button
-                    style={styles.button} 
-                    title='Send' 
-                    
+    /**
+     *  Displays the form to compose a message
+     */
+    if(messageSent === false){
+        return(
+            <View style={styles.container}>
+                <Text style={styles.addressee} >To: {contact.name}</Text>
+                <TextInput 
+                    name='from'
+                    style={styles.input} 
+                    placeholder='Name (Not required)'
+                    placeholderTextColor='#CCC'
+                    onChange={event => setFrom(event.nativeEvent.text)}
                 />
-                <View style={styles.buttonContainer}>               
-                     <Button 
-                     title='Cancel' 
-                     onPress={cancelButtonHandler}
-                     />
+                <TextInput 
+                    name='message'
+                    style={styles.input}
+                    multiline
+                    numberOfLines={4}
+                    placeholder='Message'
+                    placeholderTextColor='#CCC'
+                    textAlignVertical='top'
+                    onChange={event => setMessage(event.nativeEvent.text)}
+                />
+                <View style={styles.buttons}>
+                    <Button
+                        style={styles.button} 
+                        title='Send' 
+                        onPress={sendButtonHandler}
+                        
+                    />
+                    <View style={styles.buttonContainer}>               
+                        <Button 
+                        title='Cancel' 
+                        onPress={cancelButtonHandler}
+                        />
+                    </View>
+
                 </View>
 
             </View>
+        );
+    }
 
+    return(
+        <View style={styles.container}>
+                <Text style={styles.h2} >Thank you, your message to {contact.name} been sent.</Text>
+                <View style={styles.buttonContainer}>               
+                        <Button 
+                        title='Back' 
+                        onPress={cancelButtonHandler}
+                        />
+                </View>
         </View>
     );
 
