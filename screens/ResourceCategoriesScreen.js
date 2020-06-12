@@ -6,6 +6,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import NewsItem from '../components/NewsItem'
 import Loading from '../atoms/loading';
 import Status from '../atoms/status';
+import { Ionicons } from '@expo/vector-icons';
+
 
 import ENV from '../constants/Environment';
 
@@ -26,6 +28,22 @@ export default function ResourceCategoriesScreen({navigation}) {
     //const newsItems = useSelector(state => state.newsItems.newsItems);
     const resourceCategories = useSelector(state => state.resourceCategories.resourceCategories);
     const dispatch = useDispatch();
+
+
+  //Set up header
+  navigation.setOptions({
+    headerTitle: 'Resources',
+    headerLeft: () => (
+      <TouchableOpacity 
+        style={{paddingLeft:16}}
+        onPress={() => navigation.toggleDrawer()}>
+         <Ionicons
+            name="md-menu"
+            size={30}
+             />
+      </TouchableOpacity>
+    )
+  });
   
     useEffect(() => {    
         loadResourceCategories();

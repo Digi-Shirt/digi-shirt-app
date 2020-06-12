@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import * as contactsActions from '../store/actions/contacts';
 import {Picker} from '@react-native-community/picker';
 import { set } from 'react-native-reanimated';
+import { Ionicons } from '@expo/vector-icons';
 import ENV from '../constants/Environment';
+
 
 export default function ContactScreen({navigation}){
 
@@ -19,6 +21,20 @@ export default function ContactScreen({navigation}){
     const[from, setFrom] = useState("");
     const[messageSent, setMessageSent] = useState(false);
 
+    //Set up header
+    navigation.setOptions({
+        headerTitle: 'Contact',
+        headerLeft: () => (
+        <TouchableOpacity 
+            style={{paddingLeft:16}}
+            onPress={() => navigation.toggleDrawer()}>
+            <Ionicons
+                name="md-menu"
+                size={30}
+                />
+        </TouchableOpacity>
+        )
+    });
     
     const dispatch = useDispatch();
 

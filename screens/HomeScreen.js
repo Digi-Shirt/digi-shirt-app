@@ -3,6 +3,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, Button, View, FlatList, ShadowPropTypesIOS } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
 import NewsItem from '../components/NewsItem'
 import Loading from '../atoms/loading';
 import Status from '../atoms/status';
@@ -22,9 +23,22 @@ export default function HomeScreen({navigation}) {
   const newsItems = useSelector(state => state.newsItems.newsItems);
   const dispatch = useDispatch();
 
-  //navigation.setOptions({headerTitle: 'derp'});
-  // This attempts to Load data from dev API
+  //Set up header
+  navigation.setOptions({
+    headerTitle: 'News',
+    headerLeft: () => (
+      <TouchableOpacity 
+        style={{paddingLeft:16}}
+        onPress={() => navigation.toggleDrawer()}>
+         <Ionicons
+            name="md-menu"
+            size={30}
+             />
+      </TouchableOpacity>
+    )
+  });
   
+  //Load News Items REST API
   useEffect(() => {
      loadNewsItems();
   }, [dispatch]);

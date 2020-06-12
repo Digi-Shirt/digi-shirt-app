@@ -1,16 +1,32 @@
 import React, {useEffect, useCallback} from 'react';
-import { StyleSheet, Text, View, TextInput, Button} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 
 import { changeInviteCode, updateSettings } from '../store/actions/settings';
 
-export default function ContactScreen(){
+export default function SettingsScreen({navigation}){
     
     // get all of the settings from the store with useSelector,
     // use hooks to capture changes to the settings
     const settings = useSelector(state => state.settings);
     const [inviteCode, setInviteCode] = useState(settings.inviteCode);
+
+    //Set up header
+    navigation.setOptions({
+        headerTitle: 'Settings',
+        headerLeft: () => (
+        <TouchableOpacity 
+            style={{paddingLeft:16}}
+            onPress={() => navigation.toggleDrawer()}>
+            <Ionicons
+                name="md-menu"
+                size={30}
+                />
+        </TouchableOpacity>
+        )
+    });
     
     //create a callback function to have dispatched when save button is pressed
     const dispatch = useDispatch();

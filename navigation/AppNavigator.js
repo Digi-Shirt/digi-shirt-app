@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StatusBar, SafeAreaView, StyleSheet, View, Text } from 'react-native';
+import { Platform, StatusBar, SafeAreaView, StyleSheet, View, Text, Button } from 'react-native';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,41 +17,48 @@ import ContactScreen from '../screens/ContactScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ResourceCategoryScreen from '../screens/ResourcesCategoryScreen';
 
+const INITIAL_ROUTE_NAME = 'Home';
 
-const Stack = createStackNavigator();
+const NewsStack = createStackNavigator();
+export const NewsStackNav = () => {
 
-export const StackNav = ({ navigation, route }) => {
-    //const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-    //console.log(routeName);
-
-
-
-    function getHeaderTitle(route) {
-        const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-      
-        switch (routeName) {
-          case 'Contact':
-            return 'Contact';
-          case 'Home':
-            return 'News Feed';
-          case 'Resources':
-            return 'Resources';
-          case 'Settings':
-              return 'Settings';
-        }
-    }
-    
     return(
-        <Stack.Navigator>
-            <Stack.Screen name="Drawer" component={DrawerNav} />
-            <Stack.Screen name="Contact" component={ContactScreen} />
-            <Stack.Screen name="ResourceCategory" component={ResourceCategoryScreen} />
-            <Stack.Screen name="NewsItem" component={NewsItemScreen} />
-        </Stack.Navigator>
+        <NewsStack.Navigator>
+            <NewsStack.Screen name="Contact" component={HomeScreen} />
+            <NewsStack.Screen name="NewsItem" component={NewsItemScreen} />
+        </NewsStack.Navigator>
     );
-    
+}
 
+const ResourcesStack = createStackNavigator();
+export const ResourcesStackNav = () => {
 
+    return(
+        <ResourcesStack.Navigator>
+            <ResourcesStack.Screen name="ResourceCategories" component={ResourceCategoriesScreen} />
+            <ResourcesStack.Screen name="ResourceCategory" component={ResourceCategoryScreen} />
+        </ResourcesStack.Navigator>
+    );
+}
+
+const ContactStack = createStackNavigator();
+export const ContactStackNav = () => {
+
+    return(
+        <ContactStack.Navigator>
+            <ContactStack.Screen name="Contact" component={ContactScreen} />
+        </ContactStack.Navigator>
+    );
+}
+
+const SettingsStack = createStackNavigator();
+export const SettingsStackNav = () => {
+
+    return(
+        <SettingsStack.Navigator>
+            <SettingsStack.Screen name="Contact" component={SettingsScreen} />
+        </SettingsStack.Navigator>
+    );
 }
 
 
@@ -60,8 +67,10 @@ const DrawerNavigator = createDrawerNavigator();
 export const DrawerNav =({navigation, route}) => {
     return (
         <DrawerNavigator.Navigator>
-                <DrawerNavigator.Screen name="Digi-Shirt" component={BottomTabNavigator} />
-                <DrawerNavigator.Screen name="Settings" component={SettingsScreen} />    
+                <DrawerNavigator.Screen name="Home" component={NewsStackNav}  />
+                <DrawerNavigator.Screen name="Resources" component={ResourcesStackNav} />
+                <DrawerNavigator.Screen name="Contact" component={ContactStackNav} />
+                <DrawerNavigator.Screen name="Settings" component={SettingsStackNav} />
         </DrawerNavigator.Navigator>
     );
 };
@@ -77,7 +86,7 @@ const AppNavigator = ({navigation, route}) => {
         <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
             <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-              <StackNav />    
+              <DrawerNav />  
             </NavigationContainer>
         </View>
     );
