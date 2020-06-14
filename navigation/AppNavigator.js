@@ -16,6 +16,8 @@ import newsItems from '../components/__mock__/newsItems';
 import ContactScreen from '../screens/ContactScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ResourceCategoryScreen from '../screens/ResourcesCategoryScreen';
+import CustomDrawerContent from './DrawerContent';
+import LoginScreen from '../screens/LoginScreen';
 
 const INITIAL_ROUTE_NAME = 'Home';
 
@@ -28,7 +30,7 @@ export const NewsStackNav = () => {
             <NewsStack.Screen name="NewsItem" component={NewsItemScreen} />
         </NewsStack.Navigator>
     );
-}
+};
 
 const ResourcesStack = createStackNavigator();
 export const ResourcesStackNav = () => {
@@ -39,7 +41,7 @@ export const ResourcesStackNav = () => {
             <ResourcesStack.Screen name="ResourceCategory" component={ResourceCategoryScreen} />
         </ResourcesStack.Navigator>
     );
-}
+};
 
 const ContactStack = createStackNavigator();
 export const ContactStackNav = () => {
@@ -49,7 +51,7 @@ export const ContactStackNav = () => {
             <ContactStack.Screen name="Contact" component={ContactScreen} />
         </ContactStack.Navigator>
     );
-}
+};
 
 const SettingsStack = createStackNavigator();
 export const SettingsStackNav = () => {
@@ -59,6 +61,15 @@ export const SettingsStackNav = () => {
             <SettingsStack.Screen name="Contact" component={SettingsScreen} />
         </SettingsStack.Navigator>
     );
+};
+
+const LoginStack = createStackNavigator();
+export const LoginStackNav = () => {
+    return(
+        <LoginStack.Navigator>
+            <LoginStack.Screen name="Login" component={LoginScreen} />
+        </LoginStack.Navigator>
+    );
 }
 
 
@@ -66,11 +77,12 @@ const DrawerNavigator = createDrawerNavigator();
 
 export const DrawerNav =({navigation, route}) => {
     return (
-        <DrawerNavigator.Navigator>
+        <DrawerNavigator.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
                 <DrawerNavigator.Screen name="Home" component={NewsStackNav}  />
                 <DrawerNavigator.Screen name="Resources" component={ResourcesStackNav} />
                 <DrawerNavigator.Screen name="Contact" component={ContactStackNav} />
                 <DrawerNavigator.Screen name="Settings" component={SettingsStackNav} />
+                <DrawerNavigator.Screen name="Login" component={LoginStackNav} />
         </DrawerNavigator.Navigator>
     );
 };
@@ -90,7 +102,7 @@ const AppNavigator = ({navigation, route}) => {
             </NavigationContainer>
         </View>
     );
-}
+};
 
 
 const styles = StyleSheet.create({
