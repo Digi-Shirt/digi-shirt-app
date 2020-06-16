@@ -8,5 +8,5 @@ export const updateUser = (userInfo) => {
 
 
 export const logout = () => {
-    return {type: UPDATE_USER};
+    return {type: LOGOUT};
 }

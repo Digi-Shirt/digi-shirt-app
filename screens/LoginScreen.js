@@ -71,15 +71,26 @@ const LoginScreen = ({navigation}) => {
       });
   };
 
-  console.log(user.userInfo);
-  if(user.userInfo){
+  const logoutButtonHandler = useCallback(()  => {
+    console.log("called logout");
+    dispatch(logout());
+   }, [dispatch]);
+
+
+  console.log("userinfo: " + JSON.stringify(user.userInfo));
+  if(user.userInfo !== undefined && user.userInfo.hasOwnProperty("user")){
+    const username = user.userInfo.user.hasOwnProperty("username") ? 
+                     user.userInfo.user.username :  "null";
     return (
       <View style={styles.container}>
         {loginSuccess && <SuccessMessage>You have successfully logged in.</SuccessMessage>}
-        <Text>You are currently logged in as: {user.userInfo.user.username}</Text>
-        <Button 
-          title='Logout'
-        />
+      <Text style={styles.h3}>You are currently logged in as: {username}</Text>
+        <View style={styles.buttonContainer}>
+          <Button 
+            title='Logout'
+            onPress={logoutButtonHandler}
+          />
+        </View>
       </View>
     );
   }
