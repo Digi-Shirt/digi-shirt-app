@@ -4,18 +4,27 @@ import { Ionicons } from '@expo/vector-icons';
 import {useSelector, useDispatch} from 'react-redux';
 import { useState } from 'react';
 
+import {updateUser, logout} from '../store/actions/user';
+
 import ENV from '../constants/Environment';
 
-
-/**
- * */
 
 const LoginScreen = ({navigation}) => {
   //set up the hooks
   const[username, setUsername] = useState("");
   const[password, setPassword] = useState("");
   const[loginError, setLoginError] = useState("");
+  const[loginSuccess, setLoginSuccess] = useState(false);
+  const[loginInfo, setLoginInfo] = useState();
 
+  //set up to save user info in the datastore
+  const user = useSelector(state => state.userInfo);
+
+  const dispatch = useDispatch();
+  const saveUserInfo = useCallback(() => {
+      dispatch(updateUser(loginInfo))
+  }, [dispatch, loginInfo]);
+  
   //Set up header
   navigation.setOptions({
     headerTitle: 'Login',
@@ -38,8 +47,8 @@ const LoginScreen = ({navigation}) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({"identifier":{username},"password":{password}});
-
+    var raw = JSON.stringify({"identifier": username,"password": password});
+    console.log(raw);
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
@@ -48,15 +57,33 @@ const LoginScreen = ({navigation}) => {
     };
 
     fetch(ENV.API_URL +"auth/local", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
+      .then(response => response.json())
+      .then(result => {
+        setLoginInfo(result);
+        saveUserInfo();
+        setLoginError("");
+        setLoginSuccess(true);
+        //console.log("login info: " + loginInfo);
+      })
       .catch(error => {
         setLoginError("Login Failed.");
         console.log('error', error)
       });
-
-      //setLoginError("Login Failed.");
   };
+
+  console.log(user.userInfo);
+  if(user.userInfo){
+    return (
+      <View style={styles.container}>
+        {loginSuccess && <SuccessMessage>You have successfully logged in.</SuccessMessage>}
+        <Text>You are currently logged in as: {user.userInfo.user.username}</Text>
+        <Button 
+          title='Logout'
+        />
+      </View>
+    );
+  }
+
 
   return (
     <View style={styles.container}>
@@ -91,6 +118,8 @@ const LoginScreen = ({navigation}) => {
       </Text>     
     </View>
   );
+
+
 };
 
 const ErrorMessage = (props) => {
@@ -102,6 +131,18 @@ const ErrorMessage = (props) => {
     <Text style={styles.errorText}>{props.message}</Text>
   </View>);
 };
+
+
+
+const SuccessMessage = (props) => {
+  return (<View style={styles.successMessageBox}>
+    <Ionicons 
+        name="md-checkmark-circle-outline" 
+        size={30} 
+        color="#090" />
+    <Text style={styles.errorText}>Login Successful!</Text>
+  </View>)
+}
 
 export default LoginScreen;
 
@@ -143,5 +184,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     fontSize: 18,
     color: '#222',
+  },
+  successMessageBox: {
+    flexDirection: 'row',
+    backgroundColor: '#BFB',
+    margin: 20,
+    padding: 20,
+    textAlignVertical: 'center',
   },
 });
