@@ -57,7 +57,7 @@ export default function MessagesScreen({navigation}) {
 
     useEffect(() => {    
         loadMessages(userId, jwt);
-    }, [dispatch, jwt, userId]);
+    }, [dispatch, jwt, userId, messages]);
 
     //function which uses dispatch to call redux store action
     //to retrieve messages for a given user, with 
@@ -67,14 +67,15 @@ export default function MessagesScreen({navigation}) {
       dispatch(messageActions.getMessages(id, token))
       .then(() => {
         console.log("Fetched " + Object.keys(messages.messages).length + " messages. ");
-        console.log(messages);
+        //console.log(messages);
+        setStatus("OK")
       })
       .catch((error) => {
         setStatus(error.message); 
       });
     };
     
-    if(messages == false) {
+    if(Object.keys(messages.messages).length === 0) {
       return(
         <View style={styles.container}>
           <Text style={styles.messageText}>
@@ -87,7 +88,8 @@ export default function MessagesScreen({navigation}) {
     return (
         <View>
             <FlatList 
-                data={messages.messages}                
+                data={messages.messages}
+                keyExtractor={item => item.id.toString()}              
                 renderItem={itemData => (
                     <Message
                         from={itemData.item.from}

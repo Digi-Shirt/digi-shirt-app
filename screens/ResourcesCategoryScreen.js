@@ -15,6 +15,7 @@ export default function ResourceCategoryScreen(props) {
     return (
         <FlatList 
         data={resourceCategory.resources}
+        keyExtractor={item => item.id.toString()}
         renderItem={itemData => (
             <View>
                 <Resource resource={itemData.item} />
