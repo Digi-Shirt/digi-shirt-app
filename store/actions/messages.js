@@ -1,19 +1,45 @@
 
-/** 
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTkxODk1NzIyLCJleHAiOjE1OTQ0ODc3MjJ9.xblRFwvbpAjztB8W0-K0wzDPj0dSYj_bMiikd04cv_4");
+/**
+ * Action definitions to be used by Redux dispatcher
+ */
 
-var raw = "";
+export const GET_MESSAGES = 'GET_MESSAGES';
+export const DELETE_MESSAGE = 'DELETE_MESSAGE';
+import ENV from '../../constants/Environment';
 
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
+export const getMessages = (userId, token) => {
+    
 
-fetch("http://dev.shirt.services/messages", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-  */
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
+
+    var raw = "";
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    return async dispatch => {
+      try {
+          //console.log(ENV.API_URL + "messages?to.id=" + userId);
+          const response = await fetch(ENV.API_URL + "messages?to.id=" + userId, requestOptions);
+          
+          if(!response.ok){
+              // can parse response for additional info if needed.
+              // throwing generic error now.
+              throw new Error('Error reaching server to get messages.');  
+          }
+          const resData = await response.json();
+      
+          dispatch({ type: GET_MESSAGES, messages: resData });
+      } catch(err) {
+          // can do something here with error. 
+          console.log("problem with the url: " + url);
+          throw err;
+      }
+  };  
+
+}; 

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Platform, StatusBar, SafeAreaView, StyleSheet, View, Text, Button } from 'react-native';
+import {useSelector} from 'react-redux';
+
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -18,8 +20,10 @@ import SettingsScreen from '../screens/SettingsScreen';
 import ResourceCategoryScreen from '../screens/ResourcesCategoryScreen';
 import CustomDrawerContent from './DrawerContent';
 import LoginScreen from '../screens/LoginScreen';
+import MessagesScreen from '../screens/MessagesScreen';
 
 const INITIAL_ROUTE_NAME = 'Home';
+
 
 const NewsStack = createStackNavigator();
 export const NewsStackNav = () => {
@@ -72,17 +76,36 @@ export const LoginStackNav = () => {
     );
 }
 
+const MessagesStack = createStackNavigator();
+export const MessageStackNav = () => {
+    return(
+        <MessagesStack.Navigator>
+            <LoginStack.Screen name="Messages" component={MessagesScreen} />
+        </MessagesStack.Navigator>
+    );
+}
+
 
 const DrawerNavigator = createDrawerNavigator();
 
 export const DrawerNav =({navigation, route}) => {
+
+    const user = useSelector(state => state.userInfo);
+
+    const username =    user.userInfo !== undefined &&
+                        user.userInfo.hasOwnProperty("user") &&
+                        user.userInfo.user.hasOwnProperty("username") ? 
+                        user.userInfo.user.username :  false;
+
     return (
         <DrawerNavigator.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
                 <DrawerNavigator.Screen name="Home" component={NewsStackNav}  />
                 <DrawerNavigator.Screen name="Resources" component={ResourcesStackNav} />
                 <DrawerNavigator.Screen name="Contact" component={ContactStackNav} />
                 <DrawerNavigator.Screen name="Settings" component={SettingsStackNav} />
+                {username && <DrawerNavigator.Screen name="Messages" component={MessageStackNav} /> }
                 <DrawerNavigator.Screen name="Login" component={LoginStackNav} />
+                
         </DrawerNavigator.Navigator>
     );
 };
