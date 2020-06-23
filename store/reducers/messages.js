@@ -14,6 +14,9 @@ const messagesReducer = (state = initialState, action) => {
         case GET_MESSAGES:
             state.messages = action.messages;
             return state;
+        case DELETE_MESSAGE:
+            state.message = state.message.filter(message => message.id != action.message.id);
+            return state;
         default:
             return state;
     }

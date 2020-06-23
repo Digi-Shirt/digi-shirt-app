@@ -15,6 +15,7 @@ import ENV from '../constants/Environment';
 export default function MessagesScreen({navigation}) {
     //Hooks manage state
     const[status, setStatus] = useState();
+    const[isRefreshing, setIsRefreshing] = useState(false);
     const messages = useSelector(state => state.messages);
     
     // create dispatch helper to execute calls redux actions
@@ -61,10 +62,10 @@ export default function MessagesScreen({navigation}) {
 
     //function which uses dispatch to call redux store action
     //to retrieve messages for a given user, with 
-    const loadMessages = (id, token) => {
+    const loadMessages = (uId, token) => {
       //setIsLoading(true);
       //setStatus("Loading...");
-      dispatch(messageActions.getMessages(id, token))
+      dispatch(messageActions.getMessages(uId, token))
       .then(() => {
         console.log("Fetched " + Object.keys(messages.messages).length + " messages. ");
         //console.log(messages);
@@ -74,6 +75,19 @@ export default function MessagesScreen({navigation}) {
         setStatus(error.message); 
       });
     };
+
+    const deleteMessageHandler = (id) => {
+      dispatch(messageActions.deleteMessage(id, jwt))
+      .then(() => {
+        console.log("Deleted message. ");
+        //console.log(messages);
+        setStatus("OK");
+        loadMessages(userId, jwt);
+      })
+      .catch((error) => {
+        setStatus(error.message); 
+      });
+    }
     
     if(Object.keys(messages.messages).length === 0) {
       return(
@@ -88,15 +102,23 @@ export default function MessagesScreen({navigation}) {
     return (
         <View>
             <FlatList 
-                data={messages.messages}
-                keyExtractor={item => item.id.toString()}              
-                renderItem={itemData => (
-                    <Message
-                        from={itemData.item.from}
-                        text={itemData.item.text}
-                        sentTime={itemData.item.created_at}
-                    />
-                )} />
+              onRefresh={() => {
+                loadMessages(userId, jwt)
+              }}
+              refreshing={isRefreshing}
+              data={messages.messages}
+              keyExtractor={item => item.id.toString()}              
+              renderItem={itemData => (
+                  <Message
+                      id={itemData.item.id}
+                      deleteMessage={() => {
+                        deleteMessageHandler(itemData.item.id)
+                      }}
+                      from={itemData.item.from}
+                      text={itemData.item.text}
+                      sentTime={itemData.item.created_at}
+                  />
+              )} />
         </View>
     );
 

@@ -77,8 +77,11 @@ export default function HomeScreen({navigation}) {
       keyExtractor={item => item.id.toString()}
       renderItem={itemData => (
          <NewsItem 
-            goTo={() => { navigation.navigate('NewsItem',  
-            { title: itemData.item.title, story: itemData.item });
+            goTo={() => { 
+              navigation.navigate('NewsItem',  
+                                  { title: itemData.item.title, 
+                                    story: itemData.item }
+                                  );
           }} 
             title={itemData.item.title} />
       )} />

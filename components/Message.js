@@ -1,33 +1,44 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import {useSelector, useDispatch} from 'react-redux';
 
+
+import * as messageActions from '../store/actions/messages';
 
 
 export default function Message(props) {
+    const user = useSelector(state => state.userInfo);
+    
 
-  const dateObj = new Date(props.sentTime);
-  const displayDate = dateObj.toDateString();
-  const time = dateObj.toLocaleTimeString();
-  return (
-    <View style={styles.messageContainer}>
-        <View style={styles.innerMessageContainer}>
-            <Text style={styles.from}>From: {props.from}</Text>
-            <Text style={styles.sentTime}>Sent: {displayDate + " @ " + time}</Text>
-            <Text style={styles.messageText}>{props.text}</Text>
+    // get the jwt security token from the userinfo
+    const jwt =   user.userInfo !== undefined &&
+    user.userInfo.hasOwnProperty("jwt") ? 
+    user.userInfo.jwt :  false;
+
+    const dateObj = new Date(props.sentTime);
+    const displayDate = dateObj.toDateString();
+    const time = dateObj.toLocaleTimeString();
+    return (
+        <View style={styles.messageContainer}>
+            <View style={styles.innerMessageContainer}>
+                <Text style={styles.from}>From: {props.from}</Text>
+                <Text style={styles.sentTime}>Sent: {displayDate + " @ " + time}</Text>
+                <Text style={styles.messageText}>{props.text}</Text>
+            </View>
+            <View style={styles.deleteContainer}>
+                <TouchableOpacity 
+                    style={styles.deleteButton}
+                    onPress={props.deleteMessage}
+                    >
+                    <Ionicons
+                        name="md-trash"
+                        size={30}
+                        />
+                </TouchableOpacity>
+            </View>
         </View>
-        <View style={styles.deleteContainer}>
-            <TouchableOpacity 
-                style={styles.deleteButton}
-                >
-                <Ionicons
-                    name="md-trash"
-                    size={30}
-                    />
-            </TouchableOpacity>
-        </View>
-    </View>
-  );
+    );
 }
 
 const styles = StyleSheet.create({

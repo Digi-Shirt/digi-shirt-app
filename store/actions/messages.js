@@ -40,6 +40,42 @@ export const getMessages = (userId, token) => {
           console.log("problem with the url: " + url);
           throw err;
       }
-  };  
-
+  }; 
 }; 
+
+export const deleteMessage = (id, token) => {
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + token);
+
+  var raw = "";
+
+  var requestOptions = {
+    method: 'DELETE',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  return async dispatch => {
+    try {
+        console.log(ENV.API_URL + "messages/" + id );
+        const response = await fetch(ENV.API_URL + "messages/" + id , requestOptions);
+        
+        if(!response.ok){
+            // can parse response for additional info if needed.
+            // throwing generic error now.
+            throw new Error('Error reaching server to get messages.');  
+        }
+        const resData = await response.json();
+    
+        dispatch({ type: DELETE_MESSAGE, messages: resData });
+    } catch(err) {
+        // can do something here with error. 
+        console.log("problem with the url: " + url);
+        throw err;
+    }
+  }; 
+
+
+};
