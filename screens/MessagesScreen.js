@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, FlatList, Button} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -15,6 +15,7 @@ import ENV from '../constants/Environment';
 export default function MessagesScreen({navigation}) {
     //Hooks manage state
     const[status, setStatus] = useState();
+    const[isLoading, setIsLoading] = useState(false);
     const[isRefreshing, setIsRefreshing] = useState(false);
     const messages = useSelector(state => state.messages);
     
@@ -58,13 +59,13 @@ export default function MessagesScreen({navigation}) {
 
     useEffect(() => {    
         loadMessages(userId, jwt);
-    }, [dispatch, jwt, userId, messages]);
+    }, [dispatch]);
 
     //function which uses dispatch to call redux store action
     //to retrieve messages for a given user, with 
     const loadMessages = (uId, token) => {
-      //setIsLoading(true);
-      //setStatus("Loading...");
+      setIsLoading(true);
+      setStatus("Loading...");
       dispatch(messageActions.getMessages(uId, token))
       .then(() => {
         console.log("Fetched " + Object.keys(messages.messages).length + " messages. ");
@@ -85,6 +86,7 @@ export default function MessagesScreen({navigation}) {
         loadMessages(userId, jwt);
       })
       .catch((error) => {
+        console.log("ERROR: " + error.message);
         setStatus(error.message); 
       });
     }
@@ -92,9 +94,19 @@ export default function MessagesScreen({navigation}) {
     if(Object.keys(messages.messages).length === 0) {
       return(
         <View style={styles.container}>
-          <Text style={styles.messageText}>
-                No messages!
+          
+                <Text style={styles.big}>¯\_(ツ)_/¯ </Text>
+                <Text style={styles.h3}>There are no messages.</Text>
+                <Text style={styles.messageText}>    
+                If you believe that's impossible, you're welcome
+                ask the server again.  Press the button below and
+                I'll go get the manager. 
+
           </Text>
+          <Button
+                  title="Ask again" 
+
+                />
         </View>
       );
     }
@@ -128,10 +140,24 @@ export default function MessagesScreen({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
+        padding: 50,
+        
     },
     messageText: {
-        color: '#333',
+        color: '#777',
+        marginVertical: 20,
+        fontSize: 18,
+        textAlign: "justify",
     },
+    h3:{
+      fontSize:25,
+     
+    },
+    big: {
+      fontSize: 50,
+  
+      textAlign: "center",
+      marginVertical: 10,
+    }
 
 });

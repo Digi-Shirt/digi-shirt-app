@@ -58,18 +58,19 @@ export const deleteMessage = (id, token) => {
   };
 
   return async dispatch => {
+    const url = ENV.API_URL + "messages/" + id;
     try {
-        console.log(ENV.API_URL + "messages/" + id );
-        const response = await fetch(ENV.API_URL + "messages/" + id , requestOptions);
+        console.log(url);
+        const response = await fetch(url, requestOptions);
         
         if(!response.ok){
             // can parse response for additional info if needed.
             // throwing generic error now.
-            throw new Error('Error reaching server to get messages.');  
+            throw new Error('Error reaching server to delete messages.');  
         }
         const resData = await response.json();
     
-        dispatch({ type: DELETE_MESSAGE, messages: resData });
+        dispatch({ type: DELETE_MESSAGE, message: resData });
     } catch(err) {
         // can do something here with error. 
         console.log("problem with the url: " + url);
