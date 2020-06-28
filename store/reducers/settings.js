@@ -1,7 +1,10 @@
-import { CHANGE_INVITE_CODE, UPDATE_SETTINGS } from "../actions/settings";
+import {    CHANGE_INVITE_CODE, 
+            UPDATE_SETTINGS,
+            TEST_INVITE_CODE } from "../actions/settings";
 
 const initialState = {
-    inviteCode: 'BYTEBACK',
+    inviteCode: "",
+    unitInfo: [],
 }
 
 const settingsReducer = (state = initialState, action) => {
@@ -9,6 +12,9 @@ const settingsReducer = (state = initialState, action) => {
         case CHANGE_INVITE_CODE:
             console.log("dispatched change_invite_code reducer changing invite coded to: " + action.inviteCode);
             return {...state, inviteCode: action.inviteCode}
+        case TEST_INVITE_CODE:
+            console.log("dispatched TEST_INVITE_CODE, saving unit info to store.")
+            return {...state, unitInfo: action.unitInfo}
         case UPDATE_SETTINGS:
             const settings = action.settings; 
             return {...state, settings}

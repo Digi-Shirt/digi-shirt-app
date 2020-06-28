@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StatusBar, SafeAreaView, StyleSheet, View, Text, Button } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import {useSelector} from 'react-redux';
 
 
@@ -14,13 +14,14 @@ import BottomTabNavigator from './BottomTabNavigator';
 import NewsItemScreen from '../screens/NewsItemScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ResourceCategoriesScreen from '../screens/ResourceCategoriesScreen';
-import newsItems from '../components/__mock__/newsItems';
 import ContactScreen from '../screens/ContactScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ResourceCategoryScreen from '../screens/ResourcesCategoryScreen';
 import CustomDrawerContent from './DrawerContent';
 import LoginScreen from '../screens/LoginScreen';
 import MessagesScreen from '../screens/MessagesScreen';
+import InviteCodeScreen from '../screens/InviteCodeScreen';
+
 
 const INITIAL_ROUTE_NAME = 'Home';
 
@@ -63,6 +64,7 @@ export const SettingsStackNav = () => {
     return(
         <SettingsStack.Navigator>
             <SettingsStack.Screen name="Contact" component={SettingsScreen} />
+            <SettingsStack.Screen name="Welcome" component={InviteCodeScreen} />
         </SettingsStack.Navigator>
     );
 };

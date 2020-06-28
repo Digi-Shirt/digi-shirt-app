@@ -104,7 +104,8 @@ export default function MessagesScreen({navigation}) {
 
           </Text>
           <Button
-                  title="Ask again" 
+                  title="Ask again"
+                  onPress={() => loadMessages(userId, jwt)} 
 
                 />
         </View>

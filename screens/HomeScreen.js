@@ -1,7 +1,7 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, Button, View, FlatList, ShadowPropTypesIOS } from 'react-native';
+import { Image, Platform, Modal, StyleSheet, Text, TouchableOpacity, Button, View, FlatList, ShadowPropTypesIOS } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import NewsItem from '../components/NewsItem'
@@ -21,9 +21,18 @@ export default function HomeScreen({navigation}) {
   const[status, setStatus] = useState("");
   const[requestDispatched, setRequestDispatched] = useState(false);
   const newsItems = useSelector(state => state.newsItems.newsItems);
+  const settings = useSelector(state => state.settings);
+  const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
 
-  //Set up header
+  // If invite code is not set, then goto invite code screen
+  if(!settings.hasOwnProperty("inviteCode") || settings.inviteCode == ""){
+      console.log("inviteCode not set.");
+      navigation.navigate('Settings', { screen: 'Welcome' });
+
+  }
+
+  // Set up header
   navigation.setOptions({
     headerTitle: 'News',
     headerLeft: () => (
