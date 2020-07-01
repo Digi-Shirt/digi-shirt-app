@@ -2,14 +2,11 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import {useSelector} from 'react-redux';
 
-
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
 
 import useLinking from './useLinking';
-import BottomTabNavigator from './BottomTabNavigator';
 
 import NewsItemScreen from '../screens/NewsItemScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -22,16 +19,12 @@ import LoginScreen from '../screens/LoginScreen';
 import MessagesScreen from '../screens/MessagesScreen';
 import InviteCodeScreen from '../screens/InviteCodeScreen';
 
-
-const INITIAL_ROUTE_NAME = 'Home';
-
-
 const NewsStack = createStackNavigator();
 export const NewsStackNav = () => {
 
     return(
         <NewsStack.Navigator>
-            <NewsStack.Screen name="Contact" component={HomeScreen} />
+            <NewsStack.Screen name="News" component={HomeScreen} />
             <NewsStack.Screen name="NewsItem" component={NewsItemScreen} />
         </NewsStack.Navigator>
     );
@@ -63,9 +56,18 @@ export const SettingsStackNav = () => {
 
     return(
         <SettingsStack.Navigator>
-            <SettingsStack.Screen name="Contact" component={SettingsScreen} />
-            <SettingsStack.Screen name="Welcome" component={InviteCodeScreen} />
+            <SettingsStack.Screen name="Settings" component={SettingsScreen} />
         </SettingsStack.Navigator>
+    );
+};
+
+const WelcomeStack = createStackNavigator();
+export const WelcomeStackNav = () => {
+
+    return(
+        <WelcomeStack.Navigator>
+            <WelcomeStack.Screen name="Welcome" component={InviteCodeScreen} />
+        </WelcomeStack.Navigator>
     );
 };
 
@@ -104,7 +106,8 @@ export const DrawerNav =({navigation, route}) => {
                 <DrawerNavigator.Screen name="Home" component={NewsStackNav}  />
                 <DrawerNavigator.Screen name="Resources" component={ResourcesStackNav} />
                 <DrawerNavigator.Screen name="Contact" component={ContactStackNav} />
-                <DrawerNavigator.Screen name="Settings" component={SettingsStackNav} />
+                <DrawerNavigator.Screen name="Settings" component={SettingsStackNav}  />
+                <DrawerNavigator.Screen name="Welcome" component={WelcomeStackNav}  options={{hidden: true}} />                
                 {username && <DrawerNavigator.Screen name="Messages" component={MessageStackNav} /> }
                 <DrawerNavigator.Screen name="Login" component={LoginStackNav} />
                 

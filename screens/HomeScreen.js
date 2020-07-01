@@ -1,35 +1,26 @@
-import * as WebBrowser from 'expo-web-browser';
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import { Image, Platform, Modal, StyleSheet, Text, TouchableOpacity, Button, View, FlatList, ShadowPropTypesIOS } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {  StyleSheet, Text, TouchableOpacity, View, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+
 import NewsItem from '../components/NewsItem'
-import Loading from '../atoms/loading';
 import Status from '../atoms/status';
-
-import ENV from '../constants/Environment';
-
-
 import * as newsItemActions from '../store/actions/newsItems';
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({ navigation }) {
 
   // Hooks setup for this component
   const[isLoading, setIsLoading] = useState(false);
   const[isRefreshing, setIsRefreshing] = useState(false);
   const[status, setStatus] = useState("");
-  const[requestDispatched, setRequestDispatched] = useState(false);
   const newsItems = useSelector(state => state.newsItems.newsItems);
   const settings = useSelector(state => state.settings);
-  const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
 
   // If invite code is not set, then goto invite code screen
   if(!settings.hasOwnProperty("inviteCode") || settings.inviteCode == ""){
       console.log("inviteCode not set.");
-      navigation.navigate('Settings', { screen: 'Welcome' });
-
+      navigation.navigate('Welcome');
   }
 
   // Set up header

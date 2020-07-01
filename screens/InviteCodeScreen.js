@@ -16,17 +16,25 @@ export default function InviteCodeScreen ({ navigation }) {
     console.log({settings});
     console.log(settings.unitInfo.unit_name);
   
-    // If invite code has been set, navigate back to home screen
-    if(!settings.hasOwnProperty("inviteCode") || settings.inviteCode != ""){
-        console.log("Invite Code was set.");
-        //navigation.navigate('Home');
+    // // If invite code has been set, navigate back to home screen
+    // if(!settings.hasOwnProperty("inviteCode") || settings.inviteCode != ""){
+    //     console.log("Invite Code was set.");
+    //     setSuccessModalVisible(false);
+    //     setModalVisible(false);
+    //    // navigation.navigate('Home', {screen: 'News'});
+    //     //navigation.navigate('Settings', { screen: 'Welcome' });
 
-    }
+    // }
     
     // set up function to dispatch the button which saves the
     // invite code.
     const dispatch = useDispatch();
     const saveInviteCode = useCallback(() => {
+        dispatch(settingActions.changeInviteCode(inviteCode));
+    }, [dispatch, inviteCode]);
+
+    // test invite code.  
+    const testInviteCode = useCallback(() => {
         dispatch(settingActions.testInviteCode(inviteCode))
         .then(() => {
             setSuccessModalVisible(true);
@@ -53,7 +61,7 @@ export default function InviteCodeScreen ({ navigation }) {
                 />
                 <Button 
                     title="Go!"
-                    onPress={saveInviteCode}    />
+                    onPress={testInviteCode}    />
                 </View>     
             </Modal>
 
@@ -76,6 +84,13 @@ export default function InviteCodeScreen ({ navigation }) {
                         <View style={styles.buttonContainer}>
                             <Button 
                                 title="Confirm"
+                                onPress={() => {
+                                    console.log("Pressed Confirm");
+                                    saveInviteCode(inviteCode);
+                                    setSuccessModalVisible(false);
+                                    setModalVisible(false);
+                                    navigation.navigate('Home');
+                                }}
                             />
                         </View>
                         <View style={styles.buttonContainer}>
