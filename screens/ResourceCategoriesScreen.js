@@ -1,23 +1,13 @@
-import * as WebBrowser from 'expo-web-browser';
 import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, Button, View, FlatList, ShadowPropTypesIOS } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import NewsItem from '../components/NewsItem'
-import Loading from '../atoms/loading';
+import { StyleSheet, Text, TouchableOpacity, View, FlatList } from 'react-native';
 import Status from '../atoms/status';
 import { Ionicons } from '@expo/vector-icons';
 
-
-import ENV from '../constants/Environment';
-
 // Custom Components
 import ResourceCategory from '../components/ResourceCategory';
-
 import * as resourceCategoriesActions from '../store/actions/resourceCategories';
 
-//import the test data
-//import MockResourceCategories from '../components/__mock__/resources';
 
 export default function ResourceCategoriesScreen({navigation}) {
      // Hooks setup for this component
@@ -27,6 +17,7 @@ export default function ResourceCategoriesScreen({navigation}) {
     const[requestDispatched, setRequestDispatched] = useState(false);
     //const newsItems = useSelector(state => state.newsItems.newsItems);
     const resourceCategories = useSelector(state => state.resourceCategories.resourceCategories);
+    const settings = useSelector(state => state.settings);
     const dispatch = useDispatch();
 
 
@@ -52,7 +43,7 @@ export default function ResourceCategoriesScreen({navigation}) {
     const loadResourceCategories = () => {
       setIsLoading(true);
       setStatus("Loading...");
-      dispatch(resourceCategoriesActions.fetchResourceCategories())
+      dispatch(resourceCategoriesActions.fetchResourceCategories(settings.inviteCode))
       .then(() => {
         setIsLoading(false);
         setStatus("");

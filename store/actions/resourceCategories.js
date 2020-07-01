@@ -6,11 +6,9 @@ export const SET_RESOURCE_CATEGORIES = 'SET_RESOURCE_CATEGORIES';
 import ENV from '../../constants/Environment';
 
 
+export const fetchResourceCategories = (inviteCode = "") => {
 
-export const fetchResourceCategories = () => {
-
-
-    const url = ENV.API_URL + 'resource-categories?unit.invite_code=BYTEBACK';
+    const url = ENV.API_URL + 'resource-categories?unit.invite_code=' + inviteCode;
   
     return async dispatch => {
         try {

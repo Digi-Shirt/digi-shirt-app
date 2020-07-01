@@ -7,10 +7,10 @@ import ENV from '../../constants/Environment';
 
 
 
-export const fetchUnitContacts = () => {
+export const fetchUnitContacts = (inviteCode = "") => {
 
 
-    const url = ENV.API_URL + 'contacts?unit.invite_code=BYTEBACK';
+    const url = ENV.API_URL + 'contacts?unit.invite_code=' + inviteCode;
   
     return async dispatch => {
         try {

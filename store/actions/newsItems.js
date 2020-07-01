@@ -5,9 +5,9 @@
 export const SET_NEWS_ITEMS = 'SET_NEWS_ITEMS';
 import ENV from '../../constants/Environment';
 
-export const fetchNewsItems = () => {
-    //TODO: make this use dynamic invite code
-    const url = ENV.API_URL + 'news-items?unit.invite_code=BYTEBACK';
+export const fetchNewsItems = (inviteCode = "") => {
+
+    const url = ENV.API_URL + 'news-items?unit.invite_code=' + inviteCode;
     return async dispatch => {
         try {
             

@@ -46,7 +46,7 @@ export default function HomeScreen({ navigation }) {
   const loadNewsItems = () => {
     setIsLoading(true);
     setStatus("Loading...");
-    dispatch(newsItemActions.fetchNewsItems())
+    dispatch(newsItemActions.fetchNewsItems(settings.inviteCode))
     .then(() => {
       setIsLoading(false);
       setStatus("");

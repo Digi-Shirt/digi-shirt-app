@@ -11,15 +11,16 @@ import ENV from '../constants/Environment';
 export default function ContactScreen({navigation}){
 
     // Hooks setup for this component
-    const[isLoading, setIsLoading] = useState(false);
-    const[isRefreshing, setIsRefreshing] = useState(false);
-    const[status, setStatus] = useState("");
-    const[requestDispatched, setRequestDispatched] = useState(false);
-    const contacts = useSelector(state => state.unitContacts.unitContacts);
-    const[contact, setContact] = useState(null);
-    const[message, setMessage] = useState("");
-    const[from, setFrom] = useState("");
-    const[messageSent, setMessageSent] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [status, setStatus] = useState("");
+    const [requestDispatched, setRequestDispatched] = useState(false); 
+    const [contact, setContact] = useState(null);
+    const [message, setMessage] = useState("");
+    const [from, setFrom] = useState("");
+    const [messageSent, setMessageSent] = useState(false);
+    const settings = useSelector(state => state.settings);
+    const contacts = useSelector(state => state.unitContacts.unitContacts); 
 
     //Set up header
     navigation.setOptions({
@@ -45,7 +46,7 @@ export default function ContactScreen({navigation}){
      const loadContacts = () => {
        setIsLoading(true);
        setStatus("Loading...");
-       dispatch(contactsActions.fetchUnitContacts())
+       dispatch(contactsActions.fetchUnitContacts(settings.inviteCode))
        .then(() => {
          setIsLoading(false);
          setStatus("");
@@ -88,9 +89,6 @@ export default function ContactScreen({navigation}){
                 
     }
     
-
-    console.log(contacts);
-
     //If you have an addressee has not been chosen display the picker
     if(contact === null){
         return(
