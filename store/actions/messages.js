@@ -5,6 +5,8 @@
 
 export const GET_MESSAGES = 'GET_MESSAGES';
 export const DELETE_MESSAGE = 'DELETE_MESSAGE';
+export const GET_MESSAGE_COUNT = 'GET_MESSAGE_COUNT';
+
 import ENV from '../../constants/Environment';
 
 export const getMessages = (userId, token) => {

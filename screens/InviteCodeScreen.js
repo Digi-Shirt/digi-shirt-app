@@ -14,7 +14,16 @@ export default function InviteCodeScreen ({ navigation }) {
 
     console.log("SETTINGS: ");
     console.log({settings});
-    console.log(settings.unitInfo.unit_name);
+
+    const unitName = settings.hasOwnProperty("unitInfo") 
+                     && settings.unitInfo.hasOwnProperty("unit_name") 
+                     ? settings.unitInfo.unit_name : "";
+
+    const unitNameLong = settings.hasOwnProperty("unitInfo") 
+                     && settings.unitInfo.hasOwnProperty("unit_name_long") 
+                     ? settings.unitInfo.unit_name_long : "";
+             
+    //console.log(settings.unitInfo.unit_name);
   
     // // If invite code has been set, navigate back to home screen
     // if(!settings.hasOwnProperty("inviteCode") || settings.inviteCode != ""){
@@ -74,7 +83,7 @@ export default function InviteCodeScreen ({ navigation }) {
                     <Text style={styles.h2}>Congratulations,</Text>
                     <Text style={styles.textBlock}>
                        you're ready to join the <Text style={styles.bold}>
-                           {settings.unitInfo.unit_name_long}</Text>!
+                           {unitNameLong}</Text>!
                                                
                      </Text>
                      <Text style={styles.messageText}>
