@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {  StyleSheet, Text, TouchableOpacity, View, FlatList } from 'react-native';
+import {  StyleSheet, Text, TouchableOpacity, View, FlatList, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import NewsItem from '../components/NewsItem'
@@ -60,9 +60,20 @@ export default function HomeScreen({ navigation }) {
   
   if(!isLoading && newsItems.length === 0){
     return (
-      <View>
-        <Text>There are no news items available.</Text>
-      </View>
+      <View style={styles.container}>
+          
+                <Text style={styles.big}>¯\_(ツ)_/¯ </Text>
+                <Text style={styles.h3}>There are no news items.</Text>
+                <Text style={styles.messageText}>    
+                If you just joined a unit, it's possible that you just need
+                to ask the server again.
+          </Text>
+          <Button
+                  title="Ask again"
+                  onPress={() => loadNewsItems()} 
+
+                />
+        </View>
     );
   }
 
@@ -97,6 +108,27 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
 
+  container: {
+    flex: 1,
+    padding: 50,
+    
+},
+messageText: {
+    color: '#777',
+    marginVertical: 20,
+    fontSize: 18,
+    textAlign: "justify",
+},
+h3:{
+  fontSize:25,
+ 
+},
+big: {
+  fontSize: 50,
+
+  textAlign: "center",
+  marginVertical: 10,
+}
 })
 
 
