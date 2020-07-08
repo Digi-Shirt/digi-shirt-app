@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "0.1.5",
     "orientation": "portrait",
     "icon": "./assets/images/digi-shirt-icon.png",
     "scheme": "myapp",
@@ -25,7 +25,7 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Product demo of Digi-Shirt.  v0.1.2",
+    "description": "Product demo of Digi-Shirt.  v0.1.5",
     "githubUrl": "https://github.com/Digi-Shirt/digi-shirt-app"
   }
 }

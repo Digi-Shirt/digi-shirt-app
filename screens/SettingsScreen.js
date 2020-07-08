@@ -6,6 +6,8 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { changeInviteCode, updateSettings } from '../store/actions/settings';
 
+import ENV from '../constants/Environment';
+
 export default function SettingsScreen({navigation}){
     
     // get all of the settings from the store with useSelector,
@@ -37,7 +39,11 @@ export default function SettingsScreen({navigation}){
 
     return(
         <View style={styles.container}>
-            <Text style={styles.h2}>CHANGE YOUR INVITE CODE </Text>
+            <Text style={styles.messageText}>
+                Version: {ENV.APP_VERSION} {'\n'}
+                API: {ENV.API_URL}
+            </Text>
+            <Text style={styles.h2} >Change invite code </Text>
             <Text style={styles.info} >This code is provided by your squadron.</Text>
             <TextInput 
                 style={styles.input}            
@@ -47,6 +53,7 @@ export default function SettingsScreen({navigation}){
                 
             />
             <Button title="Save" onPress={saveSettings} />
+
         </View>
     );
 }
@@ -57,13 +64,14 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     h2: {
-        fontSize: 40,
-        textAlign: "center",
-        margin: 20,
+        fontSize: 30,
+        textAlign: "justify",
+        
     },
     info: {
-        textAlign: "center",
+        textAlign: "justify",
         fontSize: 18,
+        color: '#777',
     },
     input: {
         fontSize: 24,
@@ -71,5 +79,15 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         marginVertical: 20,     
         padding: 5,   
+    },
+    messageText: {
+        color: '#777',
+        marginVertical: 20,
+        fontSize: 18,
+        textAlign: "justify",
+    },
+    h3:{
+      fontSize:25,
+     
     },
 });
