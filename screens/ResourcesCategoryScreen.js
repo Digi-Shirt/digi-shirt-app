@@ -7,6 +7,7 @@ import { View, Text, FlatList } from 'react-native';
 
 //import the Resources Component to display each resource
 import Resource from '../components/Resource';
+import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
 
 
 
@@ -17,6 +18,7 @@ export default function ResourceCategoryScreen({navigation, route}) {
                   resourceCategory.name :
                   "Resources";
     
+                  console.log(resourceCategory);
     //Set up header
     navigation.setOptions({
         headerTitle: title,
