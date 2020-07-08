@@ -10,8 +10,22 @@ import Resource from '../components/Resource';
 
 
 
-export default function ResourceCategoryScreen(props) {
-    const resourceCategory = props.route.params.resourceCategory;
+export default function ResourceCategoryScreen({navigation, route}) {
+
+    const resourceCategory = route.params.resourceCategory;
+    const title = resourceCategory.hasOwnProperty("name") ? 
+                  resourceCategory.name :
+                  "Resources";
+    
+    //Set up header
+    navigation.setOptions({
+        headerTitle: title,
+
+    });
+
+
+    
+
     return (
         <FlatList 
         data={resourceCategory.resources}
