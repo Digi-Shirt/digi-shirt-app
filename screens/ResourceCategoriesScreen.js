@@ -52,8 +52,10 @@ export default function ResourceCategoriesScreen({navigation}) {
         setStatus(error.message);
       });
     };
-    
-    if(resourceCategories == false) {
+
+    console.log(resourceCategories);
+
+    if(Object.keys(resourceCategories).length === 0 || resourceCategories[0] == null) {    
       return(
         <View style={styles.container}>
           <Text style={styles.messageText}>
