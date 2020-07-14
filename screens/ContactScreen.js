@@ -57,6 +57,7 @@ export default function ContactScreen({navigation}){
      };
 
      const cancelButtonHandler = () => {
+         setMessageSent(false);
          setContact(null);
      };
 
