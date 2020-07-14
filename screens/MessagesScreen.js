@@ -36,11 +36,7 @@ export default function MessagesScreen({navigation}) {
                     user.userInfo.user.hasOwnProperty("id") ? 
                     user.userInfo.user.id :  false;
     
-    console.log("==USERINFO==");
-    console.log("jwt:  " +jwt);
-    console.log("id: " + userId)
-
-
+                    
     //set up the stack header
     //title and the open drawer button
     navigation.setOptions({
