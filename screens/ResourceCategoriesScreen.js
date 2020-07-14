@@ -68,7 +68,9 @@ export default function ResourceCategoriesScreen({navigation}) {
 
     return (
         <View>
-            <FlatList 
+            <FlatList
+            onRefresh={loadResourceCategories}
+            refreshing={isRefreshing} 
             data={resourceCategories}
             keyExtractor={item => item.id.toString()}
             renderItem={itemData => (
