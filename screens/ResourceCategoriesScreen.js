@@ -53,7 +53,7 @@ export default function ResourceCategoriesScreen({navigation}) {
       });
     };
 
-    console.log(resourceCategories);
+    //console.log(resourceCategories);
 
     if(Object.keys(resourceCategories).length === 0 || resourceCategories[0] == null) {    
       return(

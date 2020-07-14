@@ -14,29 +14,48 @@ import EmailAddress from '../atoms/EmailAddress';
 export default function Resource(props) {
   const resource = props.resource;
   
+  console.log("++++++++++" + resource.name + "++++++++++")
+  console.log(resource);
+
+  const hasPhones = (resource.hasOwnProperty("phones") && 
+                    resource.phones.length > 0) ?
+                    true : false;
   
+  const hasEmails = resource.hasOwnProperty("resource_emails") &&
+                    resource.resource_emails.length > 0 ?
+                    true: false;
 
   return (
     <View style={styles.ResourceContainer} >
       <Text style={styles.ResourceName}>{resource.name}</Text>
       <View>
+        { hasPhones ? 
+          resource.phones.map(p => <PhoneNumber key={p.id} >{p.phone_number}</PhoneNumber>) 
+         : null 
+        }
+
+        { hasEmails ? 
+          resource.resource_emails.map(p => <EmailAddress key={p.id} >{p.email}</EmailAddress>) 
+          : null 
+        }
+        
         <Text style={styles.ResourceDetails}>{resource.details }</Text>
-        {resource.phone ? resource.phone.map(p => <PhoneNumber key={p} >{p}</PhoneNumber>) : null}
-        {resource.email ? resource.email.map(p => <EmailAddress key={p} >{p}</EmailAddress>) : null}
+        
       </View>  
     </View>
   );
-}
+ }
 
 
-const styles = StyleSheet.create({
+
+ const styles = StyleSheet.create({
     ResourceContainer: {
       flex: 1,
       borderColor: '#333',
       minHeight: 150,
       marginHorizontal: 10,
       marginBottom: 0,
-      marginTop: 10,
+      marginVertical: 10,
       padding: 10,
       backgroundColor: '#16e',
                
