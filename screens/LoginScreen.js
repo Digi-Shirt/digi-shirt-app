@@ -4,9 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import {useSelector, useDispatch} from 'react-redux';
 import { useState } from 'react';
 
-import {updateUser, logout} from '../store/actions/user';
-
-import ENV from '../constants/Environment';
+import {updateUser, login, logout} from '../store/actions/user';
 
 
 const LoginScreen = ({navigation}) => {
@@ -41,34 +39,17 @@ const LoginScreen = ({navigation}) => {
   });
 
   const loginButtonHandler = () => {
-    console.log("LOGIN: " + username);
-    console.log("PASS: " + password);
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({"identifier": username,"password": password});
-    console.log(raw);
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
-
-    fetch(ENV.API_URL +"auth/local", requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        setLoginInfo(result);
-        saveUserInfo();
+    dispatch(login(username, password))
+    .then(() => {
         setLoginError("");
         setLoginSuccess(true);
-        //console.log("login info: " + loginInfo);
-      })
-      .catch(error => {
-        setLoginError("Login Failed.");
-        console.log('error', error)
-      });
+      }
+    )
+    .catch(error => {
+      console.log("Error in logging in");
+      setLoginError("Authentication Error.");
+    });
+   
   };
 
   const logoutButtonHandler = useCallback(()  => {
@@ -76,11 +57,13 @@ const LoginScreen = ({navigation}) => {
     dispatch(logout());
    }, [dispatch]);
 
-
-  console.log("userinfo: " + JSON.stringify(user.userInfo));
+  // If user is defined an it has a user property... then everything has worked,
+  // and we should show a login success message.
   if(user.userInfo !== undefined && user.userInfo.hasOwnProperty("user")){
     const username = user.userInfo.user.hasOwnProperty("username") ? 
                      user.userInfo.user.username :  "null";
+
+  
     return (
       <View style={styles.container}>
         {loginSuccess && <SuccessMessage>You have successfully logged in.</SuccessMessage>}
@@ -94,7 +77,6 @@ const LoginScreen = ({navigation}) => {
       </View>
     );
   }
-
 
   return (
     <View style={styles.container}>
