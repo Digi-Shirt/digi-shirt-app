@@ -25,7 +25,7 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Product demo of Digi-Shirt.  v0.1.5",
+    "description": "Product demo of Digi-Shirt.  v0.1.5\n\nFixed several bugs.  See https://github.com/Digi-Shirt/digi-shirt-app/milestone/1?closed=1  for details. ",
     "githubUrl": "https://github.com/Digi-Shirt/digi-shirt-app"
   }
 }

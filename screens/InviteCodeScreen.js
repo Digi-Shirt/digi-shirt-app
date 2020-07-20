@@ -1,9 +1,13 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, Button, Modal, StyleSheet, Image, TextInput } from 'react-native';
+import { View, Text, Button, Modal, StyleSheet, Image, TextInput, ImageBackground } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 import * as settingActions from '../store/actions/settings';
+import EnterInviteCodeModal from '../components/EnterInviteCodeModal';
+import ConfirmInviteCodeModal from '../components/ConfirmInviteCodeModal';
+import StandardButton from '../atoms/StandardButton';
 
+import styles from '../constants/defaultStyle';
 
 export default function InviteCodeScreen ({ navigation }) {
     // set up hooks to manage state
@@ -11,9 +15,6 @@ export default function InviteCodeScreen ({ navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [successModalVisible, setSuccessModalVisible] = useState(false);
     const [inviteCode, setInviteCode] = useState();
-
-    console.log("SETTINGS: ");
-    console.log({settings});
 
     const unitName = settings.hasOwnProperty("unitInfo") 
                      && settings.unitInfo.hasOwnProperty("unit_name") 
@@ -23,18 +24,6 @@ export default function InviteCodeScreen ({ navigation }) {
                      && settings.unitInfo.hasOwnProperty("unit_name_long") 
                      ? settings.unitInfo.unit_name_long : "";
              
-    //console.log(settings.unitInfo.unit_name);
-  
-    // // If invite code has been set, navigate back to home screen
-    // if(!settings.hasOwnProperty("inviteCode") || settings.inviteCode != ""){
-    //     console.log("Invite Code was set.");
-    //     setSuccessModalVisible(false);
-    //     setModalVisible(false);
-    //    // navigation.navigate('Home', {screen: 'News'});
-    //     //navigation.navigate('Settings', { screen: 'Welcome' });
-
-    // }
-    
     // set up function to dispatch the button which saves the
     // invite code.
     const dispatch = useDispatch();
@@ -46,135 +35,63 @@ export default function InviteCodeScreen ({ navigation }) {
     const testInviteCode = useCallback(() => {
         dispatch(settingActions.testInviteCode(inviteCode))
         .then(() => {
+
             setSuccessModalVisible(true);
         })
         .catch(error => console.log(error)); 
     }, [dispatch, inviteCode]);
 
+    //
+    // 
+    
+    const confirmButtonHandler = () => {
+        console.log("Pressed Confirm");
+        saveInviteCode(inviteCode);
+        setSuccessModalVisible(false);
+        setModalVisible(false);
+        navigation.navigate('Home');
+    };
+
+    const cancelButtonHandler = () => {
+        console.log("Pressed Cancel");
+        setSuccessModalVisible(false);
+    };
+
+
     return(
         <View style={styles.container}>
-            <Modal
-                animationType="slide"
-                visible={modalVisible} 
-                presentationStyle="fullScreen"
-            >
-               <View style={styles.modalView}>
-                    <Text style={styles.h1}>Welcome to Digi-Shirt</Text>
-                    <Text style={styles.textBlock}>To get started you'll need to enter 
-                    your squadron's invite code. </Text>
-                    <TextInput 
-                style={styles.input}            
-                placeholder='Invite Code'
-                onChangeText={code => {setInviteCode(code)}}
-                
+            
+            <ImageBackground 
+                source={require('../assets/images/elephant_walk.jpeg')}
+                style={styles.backgroundImage}
+                >
+                <EnterInviteCodeModal 
+                    visible={modalVisible}
+                    buttonPressHandler={testInviteCode} 
+                    onUpdate={setInviteCode}/>
+
+                <ConfirmInviteCodeModal 
+                visible={successModalVisible}
+                unitNameLong={unitNameLong}
+                confirmHandler={confirmButtonHandler}
+                cancelHandler={cancelButtonHandler}
+                /> 
+
+
+                <Image
+                    style={styles.placeHolderImage}
+                    source={require('../assets/images/digi-shirt-logo-thick-stroked.png')}
                 />
-                <Button 
-                    title="Go!"
-                    onPress={testInviteCode}    />
-                </View>     
-            </Modal>
+                <View style={styles.buttonsContainer}>
+                    <StandardButton 
+                        title="Get Started!"
+                        onPress={() => {setModalVisible(true)}}
+                    />
+                </View>
 
-            <Modal
-                animationType="slide"
-                visible={successModalVisible} 
-                presentationStyle="fullScreen"
-            >
-               <View style={styles.modalView}>
-                    <Text style={styles.h2}>Congratulations,</Text>
-                    <Text style={styles.textBlock}>
-                       you're ready to join the <Text style={styles.bold}>
-                           {unitNameLong}</Text>!
-                                               
-                     </Text>
-                     <Text style={styles.messageText}>
-                        Please confirm this is the unit you are intending to join.  
-                     </Text>
-                    <View style={styles.buttonsContainer}>
-                        <View style={styles.buttonContainer}>
-                            <Button 
-                                title="Confirm"
-                                onPress={() => {
-                                    console.log("Pressed Confirm");
-                                    saveInviteCode(inviteCode);
-                                    setSuccessModalVisible(false);
-                                    setModalVisible(false);
-                                    navigation.navigate('Home');
-                                }}
-                            />
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <Button
-                                title="Nope"
-                                onPress={() => setSuccessModalVisible(false)}
-                            />
-                        </View>
-                    </View>          
-                </View>     
-            </Modal>
-
-            <Image
-                style={styles.placeHolderImage}
-                source={require('../assets/images/digi-shirt-logo-crop.png')}
-            />
-            <Button 
-                title="Get Started!"
-                onPress={() => {setModalVisible(true)}}
-                
-            />
+            </ImageBackground>
         </View>
 
 
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: 'center',
-    },
-    modalView: {
-        backgroundColor: '#FFF',
-        padding: 40,   
-
-    },
-    h1: {
-        fontSize: 50,
-    },
-    h2: {
-        fontSize: 40,
-    },
-    bold: {
-        fontWeight: 'bold'
-    },
-    textBlock: {
-        //marginHorizontal: 20,
-        marginVertical: 20,
-        fontSize: 24,
-        color: '#777',
-    },
-    placeHolderImage: {
-        marginBottom: 20,
-        width: 250,
-        height: 250,
-    },
-    input: {
-        fontSize: 24,
-        borderColor: '#CCC',
-        borderWidth: 2,
-        marginVertical: 20,     
-        padding: 5,   
-    },  
-    messageText: {
-        color: '#777',
-        marginVertical: 20,
-        fontSize: 18,
-        textAlign: "justify",
-    },
-    buttonsContainer: {
-       
-    }, 
-    buttonContainer: {
-       marginVertical: 10,
-    },   
-});
