@@ -77,6 +77,7 @@ export default function HomeScreen({ navigation }) {
     );
   }
 
+  //console.log(newsItems);
   return (
     // Data uses either the API data or Stored data
     <View style={styles.listContainer}>
@@ -94,7 +95,9 @@ export default function HomeScreen({ navigation }) {
                                     story: itemData.item }
                                   );
           }} 
-            title={itemData.item.title} />
+            //title={itemData.item.title}
+            //images={itemData.item.images} 
+            {...itemData.item} />
       )} />
       {status !=""  &&  <Status>{status}</Status>}
     </View>
