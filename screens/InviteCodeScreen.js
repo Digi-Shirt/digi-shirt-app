@@ -15,6 +15,7 @@ export default function InviteCodeScreen ({ navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [successModalVisible, setSuccessModalVisible] = useState(false);
     const [inviteCode, setInviteCode] = useState();
+    const [inviteCodeError, setInviteCodeError] = useState(false);
 
     const unitName = settings.hasOwnProperty("unitInfo") 
                      && settings.unitInfo.hasOwnProperty("unit_name") 
@@ -38,7 +39,10 @@ export default function InviteCodeScreen ({ navigation }) {
 
             setSuccessModalVisible(true);
         })
-        .catch(error => console.log(error)); 
+        .catch(error => {
+            setInviteCodeError(true);
+            console.log(error)
+        }); 
     }, [dispatch, inviteCode]);
 
     //
@@ -68,7 +72,8 @@ export default function InviteCodeScreen ({ navigation }) {
                 <EnterInviteCodeModal 
                     visible={modalVisible}
                     buttonPressHandler={testInviteCode} 
-                    onUpdate={setInviteCode}/>
+                    onUpdate={setInviteCode}
+                    inviteCodeError={inviteCodeError}/>
 
                 <ConfirmInviteCodeModal 
                 visible={successModalVisible}

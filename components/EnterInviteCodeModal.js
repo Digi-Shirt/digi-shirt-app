@@ -2,7 +2,9 @@ import * as React from 'react';
 import { View, Text, Button, Modal, StyleSheet, Image, TextInput, ImageBackground } from 'react-native';
 
 import StandardButton from '../atoms/StandardButton';
+import ErrorMessage from '../atoms/ErrorMessage';
 import styles from '../constants/defaultStyle';
+
 
 const EnterInviteCodeModal = (props) => {
 
@@ -14,14 +16,24 @@ const EnterInviteCodeModal = (props) => {
         >
         <View style={styles.modalView}>
             <Text style={styles.h1}>Welcome to Digi-Shirt</Text>
-            <Text style={styles.textBlock}>To get started you'll need to enter 
+        <Text style={styles.textBlock}>To get started you'll need to enter 
             your squadron's invite code. </Text>
-            <TextInput 
+        
+        {
+            props.inviteCodeError ? 
+             <ErrorMessage 
+                message="The invite code was not accepted."
+            />
+            : null
+        }   
+        
+        <TextInput 
         style={styles.input}            
         placeholder='Invite Code'
         onChangeText={code => {props.onUpdate(code)}}
         
         />
+
 
         <StandardButton 
             title="Go!"

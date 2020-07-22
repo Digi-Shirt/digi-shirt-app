@@ -67,15 +67,6 @@ const styles = StyleSheet.create({
     buttonsContainer: {
         flex: 1,
         flexDirection: "row",
-        //marginTop: 20,
-        //width: "90%",
-        //height: 80,
-       // alignSelf: "center",
-
-        //alignItems: "center",
-        //flexDirection: "row",
-        //alignContent: "center",       
-        //backgroundColor: "#2B0",
     },
     //
     //=== Standard Button Atom ======
@@ -102,6 +93,22 @@ const styles = StyleSheet.create({
     buttonView: {
         
     },
+    //
+    //=== Error Message Box =======
+    errorMessageBox:{
+        flexDirection: 'row',
+        backgroundColor: '#F88',
+        marginVertical: 10,
+        width: "90%",
+        padding: 20,
+        textAlignVertical: 'center',
+      },
+      errorText:{
+        textAlignVertical: 'center',
+        marginHorizontal: 20,
+        fontSize: 18,
+        color: '#222',
+      },
 
 });
 
