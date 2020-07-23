@@ -2,6 +2,12 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 
+// .color-primary-0 { color: #00519A }	/* Main Primary color */
+// .color-primary-1 { color: #0888FB }
+// .color-primary-2 { color: #006DCF }
+// .color-primary-3 { color: #00417C }
+// .color-primary-4 { color: #00315D }
+
 const styles = StyleSheet.create({
     //
     //=== Generic Containers ========
@@ -102,14 +108,57 @@ const styles = StyleSheet.create({
         width: "90%",
         padding: 20,
         textAlignVertical: 'center',
-      },
-      errorText:{
+    },
+    errorText:{
         textAlignVertical: 'center',
         marginHorizontal: 20,
         fontSize: 18,
         color: '#222',
-      },
-
+     },
+    //
+    //===  News Feed =============
+    NewsText: {
+        flex:1,
+        flexDirection: "column",
+        fontSize: 30,
+        textAlign: "right",
+        textAlignVertical: "bottom",
+        color: '#FFF',
+        //margin: 10,
+    },
+    thumbnail: {
+        width: "100%",
+        height: 200,
+    },
+    small: {
+        width: "100%",
+        height: 300,
+    },
+    NewsItemContainer: {
+        flex: 1,
+        borderColor: '#333',
+        minHeight: 150,
+        marginHorizontal: 10,
+        marginTop: 10,
+        padding: 10,
+        backgroundColor: '#00529A',
+    },
+    newsStoryItemContainer: {
+        flex: 1,
+        minHeight: 500,
+    },
+    newsItemScrollView: {
+  
+        padding: 0,
+    },
+    storyText:{
+        fontSize: 20,
+        marginTop: 10,
+        color: '#222',
+    },
+    newsStoryTextContainer: {
+        padding: 10,
+    }
 });
 
 export default styles;
