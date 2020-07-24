@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { autoMergeLevel1 } from 'redux-persist/es/stateReconciler/autoMergeLevel1';
 
 
 // .color-primary-0 { color: #00519A }	/* Main Primary color */
@@ -126,14 +127,6 @@ const styles = StyleSheet.create({
         color: '#FFF',
         //margin: 10,
     },
-    thumbnail: {
-        width: "100%",
-        height: 200,
-    },
-    small: {
-        width: "100%",
-        height: 300,
-    },
     NewsItemContainer: {
         flex: 1,
         borderColor: '#333',
@@ -158,7 +151,24 @@ const styles = StyleSheet.create({
     },
     newsStoryTextContainer: {
         padding: 10,
+    },
+    //
+    //=== Images =================
+    thumbnail: {
+        width: "100%",
+        height: 200,
+    },
+    small: {
+        width: "100%",
+        height: 300,
+    },
+    fullLength: {
+        width: "100%",
+        height: 200,
+        resizeMode: "contain",
     }
+    
+
 });
 
 export default styles;

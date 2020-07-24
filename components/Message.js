@@ -11,7 +11,7 @@ export default function Message(props) {
     const user = useSelector(state => state.userInfo);
     
 
-    // get the jwt security token from the userinfo
+    // get the jwt security token from the userInfo
     const jwt =   user.userInfo !== undefined &&
     user.userInfo.hasOwnProperty("jwt") ? 
     user.userInfo.jwt :  false;

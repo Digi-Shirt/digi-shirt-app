@@ -17,6 +17,9 @@ export default function InviteCodeScreen ({ navigation }) {
     const [inviteCode, setInviteCode] = useState();
     const [inviteCodeError, setInviteCodeError] = useState(false);
 
+    const unitInfo = settings.hasOwnProperty("unitInfo")                      
+                     ? settings.unitInfo : "";
+
     const unitName = settings.hasOwnProperty("unitInfo") 
                      && settings.unitInfo.hasOwnProperty("unit_name") 
                      ? settings.unitInfo.unit_name : "";
@@ -24,6 +27,7 @@ export default function InviteCodeScreen ({ navigation }) {
     const unitNameLong = settings.hasOwnProperty("unitInfo") 
                      && settings.unitInfo.hasOwnProperty("unit_name_long") 
                      ? settings.unitInfo.unit_name_long : "";
+
              
     // set up function to dispatch the button which saves the
     // invite code.
@@ -76,13 +80,12 @@ export default function InviteCodeScreen ({ navigation }) {
                     inviteCodeError={inviteCodeError}/>
 
                 <ConfirmInviteCodeModal 
-                visible={successModalVisible}
-                unitNameLong={unitNameLong}
-                confirmHandler={confirmButtonHandler}
-                cancelHandler={cancelButtonHandler}
+                    visible={successModalVisible}
+                    unitNameLong={unitNameLong}
+                    confirmHandler={confirmButtonHandler}
+                    cancelHandler={cancelButtonHandler}
+                    unitInfo={unitInfo}
                 /> 
-
-
                 <Image
                     style={styles.placeHolderImage}
                     source={require('../assets/images/digi-shirt-logo-thick-stroked.png')}
@@ -93,7 +96,6 @@ export default function InviteCodeScreen ({ navigation }) {
                         onPress={() => {setModalVisible(true)}}
                     />
                 </View>
-
             </ImageBackground>
         </View>
 
