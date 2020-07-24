@@ -61,21 +61,18 @@ export function DrawerContent(props) {
             {username && <Text style={styles.loggedIn}>
                 You are logged in as {username}</Text>}
 
+            {imageExists && 
+            <Image
+            style={styles.small}
+            source={unitImageSource}
+            />}
 
-
-                {imageExists && 
-              <Image
-                style={styles.small}
-                source={unitImageSource}
-              />}
-
-{userHasImage &&
-                    <Image 
-                        style={styles.avatar}
-                        source={userImageSource}
-                    />
-
-                }
+            {userHasImage &&
+                <Image 
+                    style={styles.avatar}
+                    source={userImageSource}
+                />
+            }
         </DrawerContentScrollView>
     );
 }

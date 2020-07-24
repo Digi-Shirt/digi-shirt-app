@@ -52,6 +52,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: "justify",
     },
+    itemContainer: {
+        flex: 1,
+        borderColor: '#333',
+        minHeight: 150,
+        marginHorizontal: 10,
+        marginTop: 10,
+        padding: 10,
+        backgroundColor: '#00529A',
+    },
     //
     //=== Images ===================
     placeHolderImage: {
@@ -166,8 +175,50 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 200,
         resizeMode: "contain",
-    }
+    },
     
+    //
+    //=== Resources Screen========
+      ResourceName: {
+        flex:1,
+        flexDirection: "column",
+        fontSize: 30,
+        textAlign: "left",
+        textAlignVertical: "top",
+        color: '#FFF',
+      },
+      ResourceDetails:{
+        fontSize: 24,
+        color: '#FFF',
+      },
+    //
+    //=== Phone Atom ============
+    phoneContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        textAlignVertical: 'center'
+      },
+      phoneIcon: {
+        marginRight: 10,
+      },
+      number: {
+        fontSize: 20,
+        color: '#FFF',
+      },
+    //
+    //=== Email Atom ============
+    emailContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        textAlignVertical: 'center'
+      },
+      emailIcon: {
+        marginRight: 10,
+      },
+      email: {
+        fontSize: 20,
+        color: '#FFF',
+      }
 
 });
 
