@@ -14,15 +14,20 @@ const styles = StyleSheet.create({
     //=== Generic Containers ========
     container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: 'center',
-    },
+        //alignItems: "center",
+       //justifyContent: 'center',
+    }, 
+    containerWithPadding: {
+        flex: 1,
+        padding: 20,
+    },  
     backgroundImage:{
         flex: 1,
         width: "100%",
         paddingTop: 20,
         alignItems: "center",
     },
+
     modalView: {
         backgroundColor: '#FFF',
         padding: 20,
@@ -73,10 +78,11 @@ const styles = StyleSheet.create({
     input: {
         width: "90%",
         fontSize: 24,
-        borderColor: '#CCC',
+        borderColor: '#999',
         borderWidth: 2,
         marginVertical: 20,            
-        padding: 5,   
+        padding: 10,   
+        backgroundColor: '#FFF'
     },
     
        //wraps buttons for horizontal layout
@@ -87,8 +93,6 @@ const styles = StyleSheet.create({
     //
     //=== Standard Button Atom ======
     standardButton: {
-        flex: 1,
-        width: "90%",
         flexDirection: "row",
         marginHorizontal: 5,
         backgroundColor: '#00529a',
@@ -98,8 +102,8 @@ const styles = StyleSheet.create({
     
     },  
     buttonText: {
-        flex: 1,
-        flexDirection: "row",        
+        
+        width: "100%",
         fontSize: 26,        
         color: "white",
         alignSelf: "center",
@@ -176,6 +180,15 @@ const styles = StyleSheet.create({
         height: 200,
         resizeMode: "contain",
     },
+    avatar: {
+        height: 100,
+        width: 100,
+        borderRadius: 50,
+        marginTop: -75,
+        marginRight: 5,
+        alignSelf: 'flex-end',
+        zIndex: 1,
+    },  
     
     //
     //=== Resources Screen========

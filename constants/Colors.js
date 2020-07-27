@@ -1,6 +1,10 @@
 const tintColor = '#2f95dc';
 
 export default {
+  //light mode colors:
+  mainBackgroundColor: "#00519A",
+  
+
   tintColor,
   tabIconDefault: '#ccc',
   tabIconSelected: tintColor,
@@ -11,4 +15,5 @@ export default {
   warningText: '#666804',
   noticeBackground: tintColor,
   noticeText: '#fff',
+  
 };

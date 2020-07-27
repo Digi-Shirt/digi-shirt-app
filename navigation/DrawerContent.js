@@ -18,7 +18,7 @@ export function DrawerContent(props) {
 
     const user = useSelector(state => state.userInfo);
     const settings = useSelector(state => state.settings);
-    console.log(user);
+    
     
     // Break down some of the values from the use user state
     const loggedIn = user.userInfo !== undefined &&
@@ -39,7 +39,7 @@ export function DrawerContent(props) {
                                 "";
 
     const userImageSource = {uri : ENV.API_URL + userRelativeSource };
-    console.log(userImageSource);
+    
 
 
     // Break down some of the values for unit info from 

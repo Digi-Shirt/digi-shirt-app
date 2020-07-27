@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import * as contactsActions from '../store/actions/contacts';
-import {Picker} from '@react-native-community/picker';
+
 import { set } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
 import ENV from '../constants/Environment';
 
+import StandardButton from '../atoms/StandardButton';
+import styles from '../constants/defaultStyle';
+import SelectContact from '../components/SelectContact';
+import ComposeMessage from '../components/ComposeMessage';
 
 export default function ContactScreen({navigation}){
 
@@ -63,6 +67,7 @@ export default function ContactScreen({navigation}){
 
      const sendButtonHandler = () => {
         //put the message together...
+        console.log("called send!");
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         
@@ -72,7 +77,7 @@ export default function ContactScreen({navigation}){
             "text": message,
             "to": contact.id
         });
-        //console.log(raw);
+        
         var requestOptions = {
           method: 'POST',
           headers: myHeaders,
@@ -93,85 +98,36 @@ export default function ContactScreen({navigation}){
     //If you have an addressee has not been chosen display the picker
     if(contact === null){
         return(
-            <View style={styles.container}>
-                <Text style={styles.h2} >Who would you like to contact?</Text>
-                <Picker
-                    style={styles.input}
-                    selectedValue={contact}
-                    onValueChange={(itemValue, itemIndex) => 
-                        {
-                            //console.log(itemValue);
-                            
-                            contacts.map(contactItem => {
-                                if(contactItem.id == itemValue){
-                                    setContact(contactItem);
-                                }
-                            })
-                           // setContact(itemValue);
-                        }
-                    }
-                >
-                    <Picker.Item label="Choose a contact" value={null} />
-                    {
-                        contacts.map(contactItem => {
-                            return <Picker.Item key={contactItem.id.toString()} label={contactItem.name + " (" + contactItem.role + ")"} value={contactItem.id} />
-                        })
-
-                    }
-                </Picker>
-            </View>
+            <SelectContact
+                contacts={contacts} //the array of contacts
+                contact={contact} //currently selected contact (if one)
+                setContact={(c) => setContact(c)}
+                
+            />
         );
     }
     
     /**
      *  Displays the form to compose a message
      */
-    if(messageSent === false){
-        return(
-            <View style={styles.container}>
-                <Text style={styles.addressee} >To: {contact.name}</Text>
-                <TextInput 
-                    name='from'
-                    style={styles.input} 
-                    placeholder='Name (Not required)'
-                    placeholderTextColor='#CCC'
-                    onChange={event => setFrom(event.nativeEvent.text)}
-                />
-                <TextInput 
-                    name='message'
-                    style={styles.input}
-                    multiline
-                    numberOfLines={4}
-                    placeholder='Message'
-                    placeholderTextColor='#CCC'
-                    textAlignVertical='top'
-                    onChange={event => setMessage(event.nativeEvent.text)}
-                />
-                <View style={styles.buttons}>
-                    <Button
-                        style={styles.button} 
-                        title='Send' 
-                        onPress={sendButtonHandler}
-                        
-                    />
-                    <View style={styles.buttonContainer}>               
-                        <Button 
-                        title='Cancel' 
-                        onPress={cancelButtonHandler}
-                        />
-                    </View>
+    if(messageSent === false && contact.hasOwnProperty("user")){
+        return (
+            <ComposeMessage
+                contact={contact}
+                onPressSend={sendButtonHandler}
+                onPressCancel={cancelButtonHandler}
+                setMessage={setMessage}
+                setFrom={setFrom}
 
-                </View>
-
-            </View>
+            />
         );
     }
 
     return(
-        <View style={styles.container}>
+        <View style={[styles.container, {padding: 20}]}>
                 <Text style={styles.h2} >Thank you, your message to {contact.name} been sent.</Text>
                 <View style={styles.buttonContainer}>               
-                        <Button 
+                        <StandardButton 
                         title='Back' 
                         onPress={cancelButtonHandler}
                         />
@@ -181,10 +137,11 @@ export default function ContactScreen({navigation}){
 
 } 
 
-const styles = StyleSheet.create({
+const stylesOld = StyleSheet.create({
     container: {
-        flex: .8,
+        flex: 1,
         marginHorizontal: 20,
+        height: "100%",
     },
     h2: {
         fontSize: 40,
@@ -206,11 +163,13 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         justifyContent: 'flex-end',
-        alignItems: 'flex-start',
-        
+        height: 100,
+        marginRight: -10,
+        marginTop: -10,
     },
     buttonContainer:{
-        marginHorizontal: 5,
+        flex: .4,
+        height: 100,
     },
     cancelButton: {
         backgroundColor: '#900',
@@ -218,7 +177,22 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     addressee: {
-        fontSize: 20,
+        fontSize: 30,
         marginTop: 10,
-    }
+    },
+    avatar: {
+        height: 100,
+        width: 100,
+        borderRadius: 50,
+        marginTop: -75,
+        marginRight: 5,
+        alignSelf: 'flex-end',
+        zIndex: 1,
+    },  
+    backgroundImage:{
+        flex: 1,
+        width: "100%",
+        paddingTop: 20,
+        alignItems: "center",
+    },
 });
