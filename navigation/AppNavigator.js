@@ -111,7 +111,6 @@ export const DrawerNav =({navigation, route}) => {
                 {username && <DrawerNavigator.Screen name="Messages" component={MessageStackNav} /> }
                 {username &&  <DrawerNavigator.Screen name="Logout" component={LoginStackNav} />}
                 {!username && <DrawerNavigator.Screen name="Login" component={LoginStackNav} /> }
-                
         </DrawerNavigator.Navigator>
     );
 };
