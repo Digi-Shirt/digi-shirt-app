@@ -13,7 +13,7 @@ const ComposeMessage = (props) => {
                                      props.contact.user?.hasOwnProperty("profile_picture") ?
                                      true : false;
 
-    const profilePictureUrl = props?.contact?.user?.profile_picture.formats.thumbnail.url.substr(1);
+    const profilePictureUrl = props?.contact?.user?.profile_picture?.formats.thumbnail.url.substr(1);
 
     const profilePictureSource = {uri: ENV.API_URL + profilePictureUrl };
 

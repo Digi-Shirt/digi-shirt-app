@@ -4,6 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import {useSelector, useDispatch} from 'react-redux';
 import { useState } from 'react';
 
+import StandardButton from '../atoms/StandardButton';
+
 import {updateUser, login, logout} from '../store/actions/user';
 
 
@@ -69,7 +71,7 @@ const LoginScreen = ({navigation}) => {
         {loginSuccess && <SuccessMessage>You have successfully logged in.</SuccessMessage>}
       <Text style={styles.h3}>You are currently logged in as: {username}</Text>
         <View style={styles.buttonContainer}>
-          <Button 
+          <StandardButton 
             title='Logout'
             onPress={logoutButtonHandler}
           />
@@ -98,7 +100,7 @@ const LoginScreen = ({navigation}) => {
           onChange={event => setPassword(event.nativeEvent.text)}
       />
       <View style={styles.buttonContainer}>
-         <Button 
+         <StandardButton 
               style={styles.loginButton} 
               title='Login'
               onPress={loginButtonHandler}
@@ -163,7 +165,8 @@ const styles = StyleSheet.create({
     
   },
   buttonContainer: {
-    marginHorizontal: 20,
+    width: "90%",
+    alignSelf: "center",
   },
   errorMessageBox:{
     flexDirection: 'row',

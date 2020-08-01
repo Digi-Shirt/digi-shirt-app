@@ -6,7 +6,9 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { changeInviteCode, updateSettings } from '../store/actions/settings';
 
+import StandardButton from '../atoms/StandardButton';
 import ENV from '../constants/Environment';
+
 
 export default function SettingsScreen({navigation}){
     
@@ -52,7 +54,7 @@ export default function SettingsScreen({navigation}){
                 onChangeText={code => {setInviteCode(code)}}
                 
             />
-            <Button title="Save" onPress={saveSettings} />
+            <StandardButton title="Save" onPress={saveSettings} />
 
         </View>
     );
