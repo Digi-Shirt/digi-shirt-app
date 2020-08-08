@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+import Markdown from 'react-native-markdown-display';
 
 import ENV from '../constants/Environment';
 import styles from '../constants/defaultStyle';
@@ -38,7 +39,9 @@ export default function NewsItemScreen(props) {
                 } 
                 <View style={styles.newsStoryTextContainer}>
                     <Text style={styles.h2}>{story.title}</Text>
-                    <Text style={styles.storyText}>{story.article}</Text>
+                    <Markdown>
+                        {story.article}
+                    </Markdown>
                 </View>
             </View>
         </ScrollView>
