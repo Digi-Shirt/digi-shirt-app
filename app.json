@@ -25,7 +25,7 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Product demo of Digi-Shirt.  v0.1.6\n\nMade many enhancements, fixed a lot of bugs.\n\nWhen you get started the App should ask for a invite code,  use 'BYTEBACK'\n\nIf you want to pretend to be Shirt you can log in with the credentials \"Shirt\", \"byteback\"  \n\n",
+    "description": "Product demo of Digi-Shirt.  v0.1.7\n\nUpdated production  API\n\nWhen you get started the App should ask for a invite code,  use 'BYTEBACK'\n\nIf you want to pretend to be Shirt you can log in with the credentials \"Shirt\", \"byteback\"  \n\n",
     "githubUrl": "https://github.com/Digi-Shirt/digi-shirt-app"
   }
 }

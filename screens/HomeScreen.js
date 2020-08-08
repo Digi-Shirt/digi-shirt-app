@@ -77,7 +77,6 @@ export default function HomeScreen({ navigation }) {
     );
   }
 
-  //console.log(newsItems);
   return (
     // Data uses either the API data or Stored data
     <View style={styles.listContainer}>

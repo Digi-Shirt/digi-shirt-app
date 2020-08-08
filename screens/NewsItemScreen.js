@@ -14,9 +14,10 @@ export default function NewsItemScreen(props) {
                         ? true : false;
 
 
-    const imageRelativeUrl = imagesExist ?
+    const imageRelativeUrl = imagesExist &&
+                             story.images[0].formats.hasOwnProperty("small") ? 
                              story.images[0].formats.small.url.substr(1) : //substr(1) to remove leading '/'
-                             "";
+                             story.images[0].url.substr(1);
 
     const imageSource = { uri: ENV.API_URL + imageRelativeUrl };
     
