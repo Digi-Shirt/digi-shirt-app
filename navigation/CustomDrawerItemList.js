@@ -39,6 +39,8 @@ export default function CustomDrawerItemList({
     const focused = i === state.index;
     const { title, drawerLabel, drawerIcon, hidden } = descriptors[route.key].options;
 
+    console.log(drawerLabel);
+
     if(hidden === true){
         return null;
     }

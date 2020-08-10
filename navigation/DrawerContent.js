@@ -9,6 +9,7 @@ import React from 'react';
 import { Text, StyleSheet, Image } from 'react-native';
 import {useSelector} from 'react-redux';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import { DrawerItem } from '@react-navigation/drawer';
 
 //Custom item list component (to allow hidden navigation items)
 import CustomDrawerItemList from './CustomDrawerItemList'; 
@@ -58,8 +59,6 @@ export function DrawerContent(props) {
 
             <Text style={styles.navHeader}>Digi-Shirt</Text>
             <CustomDrawerItemList {...props} />
-            {username && <Text style={styles.loggedIn}>
-                You are logged in as {username}</Text>}
 
             {imageExists && 
             <Image

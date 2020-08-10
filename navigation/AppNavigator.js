@@ -94,6 +94,11 @@ const DrawerNavigator = createDrawerNavigator();
 
 export const DrawerNav =({navigation, route}) => {
 
+    const messageCount = useSelector(state => state.messages.messages).length;
+    const messageLabel = messageCount !== undefined ?
+                        "Messages (" + messageCount + ")" :
+                        "Messages";
+
     const user = useSelector(state => state.userInfo);
 
     const username =    user.userInfo !== undefined &&
@@ -108,7 +113,7 @@ export const DrawerNav =({navigation, route}) => {
                 <DrawerNavigator.Screen name="Contact" component={ContactStackNav} />
                 <DrawerNavigator.Screen name="Settings" component={SettingsStackNav}  />
                 <DrawerNavigator.Screen name="Welcome" component={WelcomeStackNav}  options={{hidden: true}} />                
-                {username && <DrawerNavigator.Screen name="Messages" component={MessageStackNav} /> }
+                {username && <DrawerNavigator.Screen name="Messages" options={{drawerLabel: messageLabel}}  component={MessageStackNav}  /> }
                 {username &&  <DrawerNavigator.Screen name="Logout" component={LoginStackNav} />}
                 {!username && <DrawerNavigator.Screen name="Login" component={LoginStackNav} /> }
         </DrawerNavigator.Navigator>
