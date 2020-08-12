@@ -18,6 +18,7 @@ import CustomDrawerContent from './DrawerContent';
 import LoginScreen from '../screens/LoginScreen';
 import MessagesScreen from '../screens/MessagesScreen';
 import InviteCodeScreen from '../screens/InviteCodeScreen';
+import { Ionicons } from '@expo/vector-icons';
 
 const NewsStack = createStackNavigator();
 export const NewsStackNav = () => {
@@ -106,16 +107,87 @@ export const DrawerNav =({navigation, route}) => {
                         user.userInfo.user.hasOwnProperty("username") ? 
                         user.userInfo.user.username :  false;
 
+    const icon = <Ionicons
+    name="md-menu"
+    size={30}
+     />;
     return (
         <DrawerNavigator.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
-                <DrawerNavigator.Screen name="Home" component={NewsStackNav}  />
-                <DrawerNavigator.Screen name="Resources" component={ResourcesStackNav} />
-                <DrawerNavigator.Screen name="Contact" component={ContactStackNav} />
-                <DrawerNavigator.Screen name="Settings" component={SettingsStackNav}  />
-                <DrawerNavigator.Screen name="Welcome" component={WelcomeStackNav}  options={{hidden: true}} />                
-                {username && <DrawerNavigator.Screen name="Messages" options={{drawerLabel: messageLabel}}  component={MessageStackNav}  /> }
-                {username &&  <DrawerNavigator.Screen name="Logout" component={LoginStackNav} />}
-                {!username && <DrawerNavigator.Screen name="Login" component={LoginStackNav} /> }
+                <DrawerNavigator.Screen name="Welcome" component={WelcomeStackNav}  options={{hidden: true}} />
+                <DrawerNavigator.Screen 
+                    name="Home" 
+                    component={NewsStackNav} 
+                    options={{
+                        drawerIcon: props => (<Ionicons 
+                                              name="md-home" 
+                                              size={24}
+                                              color={props.color} />)
+                    }} 
+                />
+                <DrawerNavigator.Screen 
+                    name="Resources" 
+                    component={ResourcesStackNav} 
+                    options={{
+                        drawerIcon: props => (<Ionicons 
+                                              name="ios-help-buoy" 
+                                              size={24}
+                                              color={props.color} />)
+                    }}  
+                />
+                <DrawerNavigator.Screen 
+                    name="Contact"
+                    component={ContactStackNav}
+                    options={{
+                        drawerIcon: props => (<Ionicons 
+                                              name="ios-paper-plane" 
+                                              size={24}
+                                              color={props.color} />)
+                    }}
+                />
+                <DrawerNavigator.Screen 
+                    name="Settings" 
+                    component={SettingsStackNav}  
+                    options={{
+                        drawerIcon: props => (<Ionicons 
+                                              name="md-settings" 
+                                              size={24}
+                                              color={props.color} />)
+                    }}
+                />
+                                
+                {username && 
+                    <DrawerNavigator.Screen name="Messages"
+                        options={{
+                            drawerLabel: messageLabel, 
+                            drawerIcon: props => (<Ionicons 
+                                name="md-mail" 
+                                size={24}
+                                color={props.color} />) }}  
+                        component={MessageStackNav}  
+                    /> 
+                }
+                {username &&  
+                    <DrawerNavigator.Screen 
+                        name="Logout" 
+                        component={LoginStackNav}
+                        options={{
+                            drawerIcon: props => (<Ionicons 
+                                name="md-log-out" 
+                                size={24}
+                                color={props.color} />) }} 
+                    />
+                }
+                {!username && 
+                    <DrawerNavigator.Screen 
+                        name="Login" 
+                        component={LoginStackNav}
+                        options={{
+                             drawerIcon: props => (<Ionicons 
+                                name="md-log-in" 
+                                size={24}
+                                color={props.color} />) }} 
+                    /> 
+                }
         </DrawerNavigator.Navigator>
     );
 };
