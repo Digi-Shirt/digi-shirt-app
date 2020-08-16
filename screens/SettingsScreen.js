@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Switch} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,7 +8,6 @@ import { changeInviteCode, updateSettings } from '../store/actions/settings';
 
 import StandardButton from '../atoms/StandardButton';
 import ENV from '../constants/Environment';
-
 
 export default function SettingsScreen({navigation}){
     
@@ -38,13 +37,39 @@ export default function SettingsScreen({navigation}){
         dispatch(changeInviteCode(inviteCode))
     }, [dispatch, inviteCode]);
 
-
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => {
+        console.log("Toggle API");
+        console.log(settings.productionApi);
+        
+        setIsEnabled((previousState) => 
+        {
+            settings.productionApi = !previousState;
+            updateSettings(settings);
+            return !previousState;
+            
+        });
+        
+    };
+    
     return(
         <View style={styles.container}>
             <Text style={styles.messageText}>
                 Version: {ENV.APP_VERSION} {'\n'}
                 API: {ENV.API_URL}
             </Text>
+            <View>
+                <View>
+                    <Text>Production</Text>
+                </View>
+                <View>
+                    <Switch 
+                        onValueChange={toggleSwitch}
+                        value={isEnabled}
+                    />
+                </View>
+            </View>
+
             <Text style={styles.h2} >Change invite code </Text>
             <Text style={styles.info} >This code is provided by your squadron.</Text>
             <TextInput 
@@ -62,7 +87,7 @@ export default function SettingsScreen({navigation}){
 
 const styles = StyleSheet.create({
     container: {
-        flex: .8,
+        flex: 1,
         marginHorizontal: 20,
     },
     h2: {
@@ -79,7 +104,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         borderColor: '#CCC',
         borderWidth: 2,
-        marginVertical: 20,     
+        marginVertical: 20,  
+
         padding: 5,   
     },
     messageText: {
