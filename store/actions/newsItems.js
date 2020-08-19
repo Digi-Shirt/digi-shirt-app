@@ -7,7 +7,7 @@ import ENV from '../../constants/Environment';
 
 export const fetchNewsItems = (inviteCode = "") => {
 
-    const url = ENV.API_URL + 'news-items?unit.invite_code=' + inviteCode;
+    const url = ENV.API_URL + 'news-items?_sort=created_at:DESC&unit.invite_code=' + inviteCode;
     return async dispatch => {
         try {
             
