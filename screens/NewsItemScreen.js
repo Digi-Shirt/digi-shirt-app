@@ -6,9 +6,11 @@ import ENV from '../constants/Environment';
 import styles from '../constants/defaultStyle';
 
 export default function NewsItemScreen(props) {
-    
+   
     const story = props.route.params.story;
-    //console.log(story);
+    
+    const API = props.route.params.productionApi ? ENV.API_URL : ENV.DEV_API_URL;
+    
 
     const imagesExist = story.hasOwnProperty("images") &&
                         story.images.length > 0
@@ -20,7 +22,7 @@ export default function NewsItemScreen(props) {
                              story.images[0].formats.small.url.substr(1) : //substr(1) to remove leading '/'
                              story.images[0].url.substr(1);
 
-    const imageSource = { uri: ENV.API_URL + imageRelativeUrl };
+    const imageSource = { uri: API + imageRelativeUrl };
     
     // Set up header
     props.navigation.setOptions({

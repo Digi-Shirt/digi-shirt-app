@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import NewsItem from '../components/NewsItem'
 import Status from '../atoms/status';
 import * as newsItemActions from '../store/actions/newsItems';
+import ENV from '../constants/Environment';
 
 export default function HomeScreen({ navigation }) {
 
@@ -23,9 +24,12 @@ export default function HomeScreen({ navigation }) {
       navigation.navigate('Welcome');
   }
 
+  console.log(settings.productionApi);
+
   // Set up header
+  const title = settings.productionApi ? "News" : "News (Development)";
   navigation.setOptions({
-    headerTitle: 'News',
+    headerTitle: title,
     headerLeft: () => (
       <TouchableOpacity 
         style={{paddingLeft:16}}
@@ -41,12 +45,12 @@ export default function HomeScreen({ navigation }) {
   //Load News Items REST API
   useEffect(() => {
      loadNewsItems();
-  }, [dispatch]);
+  }, [dispatch, settings.productionApi]);
 
   const loadNewsItems = () => {
     setIsLoading(true);
     setStatus("Loading...");
-    dispatch(newsItemActions.fetchNewsItems(settings.inviteCode))
+    dispatch(newsItemActions.fetchNewsItems(settings.inviteCode, settings.productionApi))
     .then(() => {
       setIsLoading(false);
       setStatus("");
@@ -88,10 +92,12 @@ export default function HomeScreen({ navigation }) {
       keyExtractor={item => item.id.toString()}
       renderItem={itemData => (
          <NewsItem 
+            productionApi={settings.productionApi}
             goTo={() => { 
               navigation.navigate('NewsItem',  
                                   { title: itemData.item.title, 
-                                    story: itemData.item }
+                                    story: itemData.item,
+                                    productionApi: true,}
                                   );
           }} 
             //title={itemData.item.title}

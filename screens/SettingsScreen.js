@@ -37,23 +37,29 @@ export default function SettingsScreen({navigation}){
         dispatch(changeInviteCode(inviteCode))
     }, [dispatch, inviteCode]);
 
+    const dispatchSettingsUpdate = useCallback(() => { 
+        dispatch(updateSettings(settings));
+    },[dispatch, settings])
+
     const defaultState = settings.hasOwnProperty("productionApi") ?
                          settings.productionApi : true;
     const [isEnabled, setIsEnabled] = useState(defaultState);
     
     const toggleSwitch = () => {
         console.log("Toggle API");
-        console.log(settings.productionApi);
+        
         
         setIsEnabled((previousState) => 
         {
             settings.productionApi = !previousState;
-            updateSettings(settings);
+            dispatchSettingsUpdate();
             return !previousState;
             
         });
-        
+        console.log(settings.productionApi);
+        console.log(isEnabled);
     };
+
     
     return(
         <View style={styles.container}>
@@ -63,18 +69,18 @@ export default function SettingsScreen({navigation}){
             </Text>
             <View style={styles.toggleTable}>
                 <View>
-                    {isEnabled ? 
-                    <Text style={styles.developmental}>Developmental</Text> :
-                    <Text style={styles.production}>Production</Text>
+                    {settings.productionApi ? 
+                    <Text style={styles.production}>Production</Text> :
+                    <Text style={styles.developmental}>Developmental</Text>                     
                     }
                     <Text>API: {ENV.API_URL}</Text>
                 </View>
                 <View style={styles.switchView}>
                     <Switch 
                         onValueChange={toggleSwitch}
-                        trackColor={{ false: "#767577", true: "#999900" }}
-                        thumbColor={isEnabled ? "#FFBF00" : "#f4f3f4"}
-                        //ios_backgroundColor="#3e3e3e"
+                        trackColor={{ true: "#CCC", false: "#999900" }}
+                        thumbColor={isEnabled ?  "#FFFFFF" : "#FFBF00"}
+                        ios_backgroundColor="#3e3e3e"
                         value={isEnabled}
                     />
                 </View>

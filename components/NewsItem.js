@@ -7,7 +7,8 @@ import styles from '../constants/defaultStyle';
 import ENV from '../constants/Environment';
 
 export default function NewsItem(props) {
-  //console.log(props);
+  
+  const API = props.productionApi ? ENV.API_URL : ENV.DEV_API_URL;
 
   const thumbnailExists = props.hasOwnProperty("images") &&
                           props.images.length > 0
@@ -26,12 +27,12 @@ export default function NewsItem(props) {
                     props.images[0].url.substr(1) : //substr(1) to remove leading '/'
                     null;
 
-  const smallSource = {uri: ENV.API_URL + small };
-  const originalSource = {uri: ENV.API_URL + original };
+  const smallSource = {uri: API + small };
+  const originalSource = {uri: API + original };
   
   
   return (
-    <TouchableOpacity onPress={() => {props.goTo();} } props={props}>
+    <TouchableOpacity onPress={() => {props.goTo(props);} } >
       <View style={styles.NewsItemContainer} >
         {
         thumbnailExists && 

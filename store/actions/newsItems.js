@@ -5,9 +5,10 @@
 export const SET_NEWS_ITEMS = 'SET_NEWS_ITEMS';
 import ENV from '../../constants/Environment';
 
-export const fetchNewsItems = (inviteCode = "") => {
+export const fetchNewsItems = (inviteCode = "", productionApi = true) => {
 
-    const url = ENV.API_URL + 'news-items?_sort=created_at:DESC&unit.invite_code=' + inviteCode;
+    const API = productionApi ? ENV.API_URL : ENV.DEV_API_URL;
+    const url = API + 'news-items?_sort=created_at:DESC&unit.invite_code=' + inviteCode;
     return async dispatch => {
         try {
             
