@@ -3,8 +3,8 @@
  */
 
 export default {
-    //API_URL: 'http://dev.shirt.services/',    //DEVELOPMENTAL
-    //API_URL: 'http://test.digi-shirt.net/',   //TEST 
+
+    DEV_API_URL: 'http://dev.shirt.services/',         //DEVELOPMENTAL
     API_URL: 'https://digi.shirt.services/',      //PRODUCTION
 
     APP_VERSION: '0.1.7',

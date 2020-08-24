@@ -5,6 +5,7 @@ import {    CHANGE_INVITE_CODE,
 const initialState = {
     inviteCode: "",
     unitInfo: [],
+    productionApi: true,
 }
 
 const settingsReducer = (state = initialState, action) => {
