@@ -10,20 +10,23 @@ import * as resourceCategoriesActions from '../store/actions/resourceCategories'
 
 
 export default function ResourceCategoriesScreen({navigation}) {
-     // Hooks setup for this component
-    const[isLoading, setIsLoading] = useState(false);
-    const[isRefreshing, setIsRefreshing] = useState(false);
-    const[status, setStatus] = useState("");
-    const[requestDispatched, setRequestDispatched] = useState(false);
-    //const newsItems = useSelector(state => state.newsItems.newsItems);
-    const resourceCategories = useSelector(state => state.resourceCategories.resourceCategories);
-    const settings = useSelector(state => state.settings);
-    const dispatch = useDispatch();
+    // Hooks setup for this component
+  const[isLoading, setIsLoading] = useState(false);
+  const[isRefreshing, setIsRefreshing] = useState(false);
+  const[status, setStatus] = useState("");
+  const[requestDispatched, setRequestDispatched] = useState(false);
+  //const newsItems = useSelector(state => state.newsItems.newsItems);
+  const resourceCategories = useSelector(state => state.resourceCategories.resourceCategories);
+  const settings = useSelector(state => state.settings);
+  const dispatch = useDispatch();
 
 
-  //Set up header
-  navigation.setOptions({
-    headerTitle: 'Resources',
+  const screenTitle = settings.productionApi ? "Resources" : "Resources (Developmental)";
+
+  
+    //Set up header
+   navigation.setOptions({
+    headerTitle: screenTitle,
     headerLeft: () => (
       <TouchableOpacity 
         style={{paddingLeft:16}}
@@ -43,7 +46,7 @@ export default function ResourceCategoriesScreen({navigation}) {
     const loadResourceCategories = () => {
       setIsLoading(true);
       setStatus("Loading...");
-      dispatch(resourceCategoriesActions.fetchResourceCategories(settings.inviteCode))
+      dispatch(resourceCategoriesActions.fetchResourceCategories(settings.inviteCode, settings.productionApi))
       .then(() => {
         setIsLoading(false);
         setStatus("");

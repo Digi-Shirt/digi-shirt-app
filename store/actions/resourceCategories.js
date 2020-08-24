@@ -11,10 +11,13 @@ export const FETCH_CATEGORY_DETAILS = 'FETCH_CATEGORY_DETAILS';
 import ENV from '../../constants/Environment';
 
 
-export const fetchResourceCategories = (inviteCode = "") => {
+export const fetchResourceCategories = (inviteCode = "", productionApi = true) => {
 
-    const url = ENV.API_URL + 'resource-categories?unit.invite_code=' + inviteCode;
-    console.log(url);
+    const API = productionApi ? ENV.API_URL : ENV.DEV_API_URL;
+
+    const url = API + 'resource-categories?unit.invite_code=' + inviteCode;
+    
+    
     return async dispatch => {
         try {
             
@@ -36,13 +39,12 @@ export const fetchResourceCategories = (inviteCode = "") => {
     };
   }; 
 
-export const fetchCategoryDetails = (categoryId = "") => {
+export const fetchCategoryDetails = (categoryId = "", productionApi = true) => {
 
-    const url = ENV.API_URL + 'resources?resource_category=' + categoryId;
+    const API = productionApi ? ENV.API_URL : ENV.DEV_API_URL;
+    const url = API + 'resources?resource_category=' + categoryId;
     
-    console.log(url);
-
-    return async dispatch => {
+      return async dispatch => {
         try {
             
             const response = await fetch(url);
