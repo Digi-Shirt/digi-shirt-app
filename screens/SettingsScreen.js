@@ -37,7 +37,10 @@ export default function SettingsScreen({navigation}){
         dispatch(changeInviteCode(inviteCode))
     }, [dispatch, inviteCode]);
 
-    const [isEnabled, setIsEnabled] = useState(false);
+    const defaultState = settings.hasOwnProperty("productionApi") ?
+                         settings.productionApi : true;
+    const [isEnabled, setIsEnabled] = useState(defaultState);
+    
     const toggleSwitch = () => {
         console.log("Toggle API");
         console.log(settings.productionApi);
@@ -55,16 +58,23 @@ export default function SettingsScreen({navigation}){
     return(
         <View style={styles.container}>
             <Text style={styles.messageText}>
-                Version: {ENV.APP_VERSION} {'\n'}
-                API: {ENV.API_URL}
+                Application Version: {ENV.APP_VERSION} 
+               
             </Text>
-            <View>
+            <View style={styles.toggleTable}>
                 <View>
-                    <Text>Production</Text>
+                    {isEnabled ? 
+                    <Text style={styles.developmental}>Developmental</Text> :
+                    <Text style={styles.production}>Production</Text>
+                    }
+                    <Text>API: {ENV.API_URL}</Text>
                 </View>
-                <View>
+                <View style={styles.switchView}>
                     <Switch 
                         onValueChange={toggleSwitch}
+                        trackColor={{ false: "#767577", true: "#999900" }}
+                        thumbColor={isEnabled ? "#FFBF00" : "#f4f3f4"}
+                        //ios_backgroundColor="#3e3e3e"
                         value={isEnabled}
                     />
                 </View>
@@ -117,5 +127,27 @@ const styles = StyleSheet.create({
     h3:{
       fontSize:25,
      
+    },
+    production:{
+        fontSize:18,
+        color: 'green',
+        fontWeight: 'bold',
+    },
+    developmental:{
+        fontSize:18,
+        color: '#997900',
+        fontWeight: 'bold',
+    },
+    switchView: {
+        flex: 1,
+        alignContent: 'center',
+        alignSelf: 'center',
+    
+    },
+    toggleTable: {
+        flexDirection: 'row',
+        alignContent: 'center',
+        marginVertical: 15,
+        
     },
 });
