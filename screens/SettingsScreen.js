@@ -37,6 +37,7 @@ export default function SettingsScreen({navigation}){
         dispatch(changeInviteCode(inviteCode))
     }, [dispatch, inviteCode]);
 
+    //
     const defaultState = settings.hasOwnProperty("productionApi") ?
                          settings.productionApi : true;
     const [isEnabled, setIsEnabled] = useState(defaultState);
