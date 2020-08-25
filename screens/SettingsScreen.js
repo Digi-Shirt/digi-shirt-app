@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
-import { changeInviteCode, updateSettings } from '../store/actions/settings';
+import { changeInviteCode, updateSettings, resetSettings } from '../store/actions/settings';
 
 import StandardButton from '../atoms/StandardButton';
 import ENV from '../constants/Environment';
@@ -13,8 +13,15 @@ export default function SettingsScreen({navigation}){
     
     // get all of the settings from the store with useSelector,
     // use hooks to capture changes to the settings
-    const settings = useSelector(state => state.settings);
+    var settings = useSelector(state => state.settings);
     const [inviteCode, setInviteCode] = useState(settings.inviteCode);
+
+    // console.log("=============SS_SETTINGS============");
+    // //console.log(settings);
+    // console.log(settings.inviteCode);
+    // console.log(inviteCode);
+    // console.log("=============SS_END SETTINGS========");
+    
 
     //Set up header
     navigation.setOptions({
@@ -33,13 +40,17 @@ export default function SettingsScreen({navigation}){
     
     //create a callback function to have dispatched when save button is pressed
     const dispatch = useDispatch();
-    const saveSettings = useCallback(() => {
-        dispatch(changeInviteCode(inviteCode))
-    }, [dispatch, inviteCode]);
+    const dispatchUpdateInviteCode = useCallback(() => {
+         dispatch(changeInviteCode(inviteCode))
+     }, [dispatch, inviteCode]);
 
     const dispatchSettingsUpdate = useCallback(() => { 
         dispatch(updateSettings(settings));
     },[dispatch, settings])
+
+    const dispatchResetSettings = useCallback(() => { 
+        dispatch(resetSettings());
+    },[dispatch])
 
     const defaultState = settings.hasOwnProperty("productionApi") ?
                          settings.productionApi : true;
@@ -95,7 +106,8 @@ export default function SettingsScreen({navigation}){
                 onChangeText={code => {setInviteCode(code)}}
                 
             />
-            <StandardButton title="Save" onPress={saveSettings} />
+            <StandardButton title="Save Invite Code" onPress={dispatchUpdateInviteCode} />
+            {/* <StandardButton title="Reset All Options" onPress={dispatchResetSettings} /> */}
 
         </View>
     );

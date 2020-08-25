@@ -1,6 +1,7 @@
 import {    CHANGE_INVITE_CODE, 
             UPDATE_SETTINGS,
-            TEST_INVITE_CODE } from "../actions/settings";
+            TEST_INVITE_CODE, 
+            RESET_SETTINGS} from "../actions/settings";
 
 const initialState = {
     inviteCode: "",
@@ -17,10 +18,13 @@ const settingsReducer = (state = initialState, action) => {
             console.log("dispatched TEST_INVITE_CODE, saving unit info to store.")
             return {...state, unitInfo: action.unitInfo}
         case UPDATE_SETTINGS:
-            console.log("made it here...");
-            const settings = action.settings; 
-            console.log("Reducer settting prodapi to " + settings.productionApi);
-            return {...state, settings}
+            // console.log("==============UPDATE_SETTINGS_REDUCER_START===========");
+            // console.log(action.settings.inviteCode);
+            // console.log("==============UPDATE_SETTINGS_REDUCER_END=============");
+            return action.hasOwnProperty("settings") ? action.settings : state;
+        case RESET_SETTINGS:
+            console.log("resetting settings...");
+            return initialState;
         default:
             return state;
     }

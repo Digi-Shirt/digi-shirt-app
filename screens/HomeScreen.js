@@ -18,13 +18,18 @@ export default function HomeScreen({ navigation }) {
   const settings = useSelector(state => state.settings);
   const dispatch = useDispatch();
 
+  // console.log("=============SETTINGS============");
+  // console.log(settings);
+  // console.log(settings.inviteCode);
+  // console.log("=============END SETTINGS========");
+
   // If invite code is not set, then goto invite code screen
   if(!settings.hasOwnProperty("inviteCode") || settings.inviteCode == ""){
-      console.log("inviteCode not set.");
-      navigation.navigate('Welcome');
+     // console.log("inviteCode not set.");
+      //navigation.navigate('Welcome');
   }
 
-  console.log(settings.productionApi);
+  
 
   // Set up header
   const title = settings.productionApi ? "News" : "News (Development)";

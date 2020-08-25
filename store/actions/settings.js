@@ -3,6 +3,11 @@ import ENV from '../../constants/Environment';
 export const CHANGE_INVITE_CODE = 'CHANGE_INVITE_CODE';
 export const TEST_INVITE_CODE = 'TEST_INVITE_CODE';
 export const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
+export const RESET_SETTINGS = 'RESET_SETTINGS';
+
+export const resetSettings = () => {
+    return {type: RESET_SETTINGS};
+}
 
 
 export const changeInviteCode = (value) => {
@@ -10,7 +15,15 @@ export const changeInviteCode = (value) => {
 }
 
 export const updateSettings = (settings) => {
-    return {type: UPDATE_SETTINGS, settings: settings};
+    // console.log("==============UPDATE_SETTINGS_ACTION_START===========");
+    //         console.log(settings);
+
+    //         //console.log("Reducer settting prodapi to " + settings.productionApi);
+    //         console.log("==============UPDATE_SETTINGS_ACTION_END=============");
+    return {
+        type: UPDATE_SETTINGS, 
+        settings: settings,
+    };
 }
 
 // Checks if the value is a valid invite code in the API
