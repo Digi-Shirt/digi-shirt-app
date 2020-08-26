@@ -57,7 +57,7 @@ export default function SettingsScreen({navigation}){
     const [isEnabled, setIsEnabled] = useState(defaultState);
     
     const toggleSwitch = () => {
-        console.log("Toggle API");
+       //console.log("Toggle API");
         
         
         setIsEnabled((previousState) => 
@@ -67,8 +67,8 @@ export default function SettingsScreen({navigation}){
             return !previousState;
             
         });
-        console.log(settings.productionApi);
-        console.log(isEnabled);
+       // console.log(settings.productionApi);
+        //console.log(isEnabled);
     };
 
     

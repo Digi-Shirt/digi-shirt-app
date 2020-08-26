@@ -39,7 +39,7 @@ export const getMessages = (userId, token) => {
           dispatch({ type: GET_MESSAGES, messages: resData });
       } catch(err) {
           // can do something here with error. 
-          console.log("problem with the url: " + url);
+          //console.log("problem with the url: " + url);
           throw err;
       }
   }; 
@@ -62,7 +62,7 @@ export const deleteMessage = (id, token) => {
   return async dispatch => {
     const url = ENV.API_URL + "messages/" + id;
     try {
-        console.log(url);
+        //console.log(url);
         const response = await fetch(url, requestOptions);
         
         if(!response.ok){
@@ -75,7 +75,7 @@ export const deleteMessage = (id, token) => {
         dispatch({ type: DELETE_MESSAGE, message: resData });
     } catch(err) {
         // can do something here with error. 
-        console.log("problem with the url: " + url);
+        //console.log("problem with the url: " + url);
         throw err;
     }
   }; 

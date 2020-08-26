@@ -113,7 +113,7 @@ export const DrawerNav =({navigation, route}) => {
      />;
     return (
         <DrawerNavigator.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
-                <DrawerNavigator.Screen name="Welcome" component={WelcomeStackNav}  options={{hidden: true}} />
+                
                 <DrawerNavigator.Screen 
                     name="Home" 
                     component={NewsStackNav} 
@@ -124,6 +124,7 @@ export const DrawerNav =({navigation, route}) => {
                                               color={props.color} />)
                     }} 
                 />
+                <DrawerNavigator.Screen name="Welcome" component={WelcomeStackNav}  options={{hidden: true}} />
                 <DrawerNavigator.Screen 
                     name="Resources" 
                     component={ResourcesStackNav} 

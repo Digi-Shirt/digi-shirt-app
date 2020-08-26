@@ -50,8 +50,8 @@ export const testInviteCode = (value) => {
                 throw new Error('The invite code could not be verified.');  
             }
             
-            console.log("INVITE CODE FOUND: " );
-            console.log({resData});
+            //console.log("INVITE CODE FOUND: " );
+            //console.log({resData});
             // if response did return an unit, dispatch that to save that info
             // in the data store
             if(resData[0].hasOwnProperty("id")){
@@ -59,7 +59,7 @@ export const testInviteCode = (value) => {
             }
         } catch(err) {
             // can do something here with error. 
-            console.log("problem with the url: " + url);
+            //console.log("problem with the url: " + url);
             throw err;
         }
     }

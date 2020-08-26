@@ -64,7 +64,7 @@ export default function MessagesScreen({navigation}) {
       setStatus("Loading...");
       dispatch(messageActions.getMessages(uId, token))
       .then(() => {
-        console.log("Fetched " + Object.keys(messages.messages).length + " messages. ");
+        //console.log("Fetched " + Object.keys(messages.messages).length + " messages. ");
         //console.log(messages);
         setStatus("OK")
       })
@@ -76,13 +76,13 @@ export default function MessagesScreen({navigation}) {
     const deleteMessageHandler = (id) => {
       dispatch(messageActions.deleteMessage(id, jwt))
       .then(() => {
-        console.log("Deleted message. ");
+        //console.log("Deleted message. ");
         //console.log(messages);
         setStatus("OK");
         loadMessages(userId, jwt);
       })
       .catch((error) => {
-        console.log("ERROR: " + error.message);
+        //console.log("ERROR: " + error.message);
         setStatus(error.message); 
       });
     }

@@ -25,8 +25,8 @@ export default function HomeScreen({ navigation }) {
 
   // If invite code is not set, then goto invite code screen
   if(!settings.hasOwnProperty("inviteCode") || settings.inviteCode == ""){
-     // console.log("inviteCode not set.");
-      //navigation.navigate('Welcome');
+    //console.log("inviteCode not set.");
+    navigation.navigate('Welcome');
   }
 
   

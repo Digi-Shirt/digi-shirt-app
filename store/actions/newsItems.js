@@ -24,7 +24,7 @@ export const fetchNewsItems = (inviteCode = "", productionApi = true) => {
             dispatch({ type: SET_NEWS_ITEMS, newsItems: resData });
         } catch(err) {
             // can do something here with error. 
-            console.log("problem with the url: " + url);
+            //console.log("problem with the url: " + url);
             throw err;
         }
     };

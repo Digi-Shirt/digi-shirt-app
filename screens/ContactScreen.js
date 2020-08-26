@@ -67,7 +67,7 @@ export default function ContactScreen({navigation}){
 
      const sendButtonHandler = () => {
         //put the message together...
-        console.log("called send!");
+        //console.log("called send!");
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         

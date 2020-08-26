@@ -7,12 +7,12 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
     switch(action.type){
         case UPDATE_USER:
-            console.log("dispatched update user: " + action.userInfo);
+            //console.log("dispatched update user: " + action.userInfo);
             return {...state, userInfo: action.userInfo};
         case LOGIN:
             return {...state, userInfo: action.userInfo};
         case LOGOUT:
-            console.log("logout action called");
+            //console.log("logout action called");
             return {...state, userInfo: {}};
         default:
             return state;

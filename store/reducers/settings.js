@@ -12,10 +12,10 @@ const initialState = {
 const settingsReducer = (state = initialState, action) => {
     switch(action.type){
         case CHANGE_INVITE_CODE:
-            console.log("dispatched change_invite_code reducer changing invite coded to: " + action.inviteCode);
+            //console.log("dispatched change_invite_code reducer changing invite coded to: " + action.inviteCode);
             return {...state, inviteCode: action.inviteCode}
         case TEST_INVITE_CODE:
-            console.log("dispatched TEST_INVITE_CODE, saving unit info to store.")
+            //console.log("dispatched TEST_INVITE_CODE, saving unit info to store.")
             return {...state, unitInfo: action.unitInfo}
         case UPDATE_SETTINGS:
             // console.log("==============UPDATE_SETTINGS_REDUCER_START===========");
@@ -23,7 +23,7 @@ const settingsReducer = (state = initialState, action) => {
             // console.log("==============UPDATE_SETTINGS_REDUCER_END=============");
             return action.hasOwnProperty("settings") ? action.settings : state;
         case RESET_SETTINGS:
-            console.log("resetting settings...");
+            //console.log("resetting settings...");
             return initialState;
         default:
             return state;

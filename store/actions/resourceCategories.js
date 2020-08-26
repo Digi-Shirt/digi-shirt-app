@@ -33,7 +33,7 @@ export const fetchResourceCategories = (inviteCode = "", productionApi = true) =
             dispatch({ type: FETCH_RESOURCE_CATEGORIES, resourceCategories: resData });
         } catch(err) {
             // can do something here with error. 
-            console.log("problem with the url: " + url);
+            //console.log("problem with the url: " + url);
             throw err;
         }
     };
@@ -63,7 +63,7 @@ export const fetchCategoryDetails = (categoryId = "", productionApi = true) => {
                     });
         } catch(err) {
             // can do something here with error. 
-            console.log("problem with the url: " + url);
+            //console.log("problem with the url: " + url);
             throw err;
         }
     };

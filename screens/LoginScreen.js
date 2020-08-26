@@ -48,14 +48,14 @@ const LoginScreen = ({navigation}) => {
       }
     )
     .catch(error => {
-      console.log("Error in logging in");
+      //console.log("Error in logging in");
       setLoginError("Authentication Error.");
     });
    
   };
 
   const logoutButtonHandler = useCallback(()  => {
-    console.log("called logout");
+    //console.log("called logout");
     dispatch(logout());
    }, [dispatch]);
 

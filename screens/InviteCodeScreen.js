@@ -45,7 +45,7 @@ export default function InviteCodeScreen ({ navigation }) {
         })
         .catch(error => {
             setInviteCodeError(true);
-            console.log(error)
+            //console.log(error)
         }); 
     }, [dispatch, inviteCode]);
 
@@ -53,7 +53,7 @@ export default function InviteCodeScreen ({ navigation }) {
     // 
     
     const confirmButtonHandler = () => {
-        console.log("Pressed Confirm");
+        //console.log("Pressed Confirm");
         saveInviteCode(inviteCode);
         setSuccessModalVisible(false);
         setModalVisible(false);
@@ -61,7 +61,7 @@ export default function InviteCodeScreen ({ navigation }) {
     };
 
     const cancelButtonHandler = () => {
-        console.log("Pressed Cancel");
+        //console.log("Pressed Cancel");
         setSuccessModalVisible(false);
     };
 
