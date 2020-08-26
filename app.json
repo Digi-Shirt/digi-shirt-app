@@ -7,10 +7,10 @@
       "android",
       "web"
     ],
-    "version": "0.1.5",
+    "version": "0.1.8",
     "orientation": "portrait",
     "icon": "./assets/images/digi-shirt-icon.png",
-    "scheme": "myapp",
+    "scheme": "digishirt",
     "splash": {
       "image": "./assets/images/digi-shirt-logo.png",
       "resizeMode": "contain",
@@ -23,9 +23,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.digishirt.digishirtapp",
+      "buildNumber": "1.0.0"
     },
-    "description": "Product demo of Digi-Shirt.  v0.1.8\n\nUpdated production  API\n\nUpdated ordering of news articles.\n\nWhen you get started the App should ask for a invite code,  use 'BYTEBACK'\n\nIf you want to pretend to be Shirt you can log in with the credentials \"Shirt\", \"byteback\"  \n\n",
+    "android": {
+      "package": "com.bulldogonaskateboard.digishirt",
+      "versionCode": 1
+    },
+    "description": "Product demo of Digi-Shirt.",
     "githubUrl": "https://github.com/Digi-Shirt/digi-shirt-app"
   }
 }

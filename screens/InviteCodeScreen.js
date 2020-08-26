@@ -70,7 +70,7 @@ export default function InviteCodeScreen ({ navigation }) {
         <View style={styles.container}>
             
             <ImageBackground 
-                source={require('../assets/images/elephant_walk.jpeg')}
+                source={require('../assets/images/elephant_walk.jpg')}
                 style={styles.backgroundImage}
                 >
                 <EnterInviteCodeModal 

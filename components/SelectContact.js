@@ -13,7 +13,7 @@ const SelectContact = (props) => {
     return(
         <View style={styles.container}>
             <ImageBackground 
-                source={require('../assets/images/refueling.jpeg')}
+                source={require('../assets/images/refueling.jpg')}
                 style={styles.backgroundImage}
                 >
            

@@ -20,7 +20,7 @@ const ComposeMessage = (props) => {
     return(
     <View style={styles.container}>
         <ImageBackground 
-        source={require('../assets/images/refueling.jpeg')}
+        source={require('../assets/images/refueling.jpg')}
         style={styles.backgroundImage}
         >
             <View style={{ paddingLeft:20, width:"100%"}}>
