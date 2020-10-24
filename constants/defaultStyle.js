@@ -105,9 +105,10 @@ const styles = StyleSheet.create({
         
         width: "100%",
         fontSize: 26,        
-        color: "white",
+        color: "#FFF",
         alignSelf: "center",
         textAlign: "center",
+        minHeight: 28,
     
     },  
     buttonView: {

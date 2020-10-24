@@ -40,7 +40,7 @@ export default function InviteCodeScreen ({ navigation }) {
     const testInviteCode = useCallback(() => {
         dispatch(settingActions.testInviteCode(inviteCode))
         .then(() => {
-
+            setModalVisible(false);
             setSuccessModalVisible(true);
         })
         .catch(error => {

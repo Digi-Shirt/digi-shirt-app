@@ -12,13 +12,13 @@ import styles from '../constants/defaultStyle';
 
 const StandardButton = (props) => {
     
+  console.log("Standard button: title:"+ props.title + " onPress: " + props.onPress);
   return (
     <TouchableOpacity
         style={styles.standardButton}
-        onPress={props.onPress}
-    >
+        onPress={props.onPress}>
 
-       <Text style={styles.buttonText}>{props.title.toString().toUpperCase()}</Text>
+       <Text style={styles.buttonText}>{props.title.toString().toUpperCase() || "Something else?"}</Text>
 
 
         
@@ -26,5 +26,7 @@ const StandardButton = (props) => {
   );
     
 }
+//
+
 
 export default StandardButton;
