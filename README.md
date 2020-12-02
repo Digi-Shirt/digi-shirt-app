@@ -20,6 +20,7 @@
 
 - [Digi-Shirt Website](https://digi-shirt.net)
 - [Digi-Shirt API Endpoint](https://digi.shirt.services)
+- [API Documentation (Swagger)](https://digi.shirt.services/documentation/v1.0.0) 
 - [DigitalU - Free Training for USAF](https://digitalu.af.mil)
 
 
