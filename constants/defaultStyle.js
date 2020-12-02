@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
     small: {
         width: "100%",
         height: 300,
+        resizeMode: "contain",
     },
     fullLength: {
         width: "100%",
