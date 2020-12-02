@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { StyleSheet, Text, TouchableOpacity, View, FlatList } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, FlatList, Button } from 'react-native';
 import Status from '../atoms/status';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -10,12 +10,11 @@ import * as resourceCategoriesActions from '../store/actions/resourceCategories'
 
 
 export default function ResourceCategoriesScreen({navigation}) {
-    // Hooks setup for this component
+  // Hooks setup for this component
   const[isLoading, setIsLoading] = useState(false);
   const[isRefreshing, setIsRefreshing] = useState(false);
   const[status, setStatus] = useState("");
   const[requestDispatched, setRequestDispatched] = useState(false);
-  //const newsItems = useSelector(state => state.newsItems.newsItems);
   const resourceCategories = useSelector(state => state.resourceCategories.resourceCategories);
   const settings = useSelector(state => state.settings);
   const dispatch = useDispatch();
@@ -49,14 +48,16 @@ export default function ResourceCategoriesScreen({navigation}) {
       dispatch(resourceCategoriesActions.fetchResourceCategories(settings.inviteCode, settings.productionApi))
       .then(() => {
         setIsLoading(false);
-        setStatus("");
+        setStatus("finished loading");
+        console.log(resourceCategories);
       })
       .catch( (error) => {
         setStatus(error.message);
+        console.log(error);
       });
     };
 
-    //console.log(resourceCategories);
+    console.log(resourceCategories);
 
     if(Object.keys(resourceCategories).length === 0 || resourceCategories[0] == null) {    
       return(
@@ -65,6 +66,12 @@ export default function ResourceCategoriesScreen({navigation}) {
                 Well, this is embarrassing. {"\n"}
                There are no resource categories.
           </Text>
+          <Button
+                  title="Ask again"
+                  onPress={() => loadResourceCategories()} 
+
+                />
+
         </View>
       );
     }

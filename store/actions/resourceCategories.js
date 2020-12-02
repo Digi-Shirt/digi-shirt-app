@@ -21,7 +21,9 @@ export const fetchResourceCategories = (inviteCode = "", productionApi = true) =
     return async dispatch => {
         try {
             
+            console.log(url);
             const response = await fetch(url);
+            
             
             if(!response.ok){
                 // can parse response for additional info if needed.

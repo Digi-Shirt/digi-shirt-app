@@ -25,6 +25,7 @@ const dialCall = (number) => {
   }
   else {
     phoneNumber = "telprompt:" + number;
+ 
   }
 
   Linking.openURL(phoneNumber);
@@ -37,7 +38,7 @@ const PhoneNumber = (props) => {
   
   return (
     <TouchableOpacity
-      onPress={() => {dialCall(formattedPhoneNumber);}}
+      onPress={() => {dialCall(props.number);}}
     >
       <View style={styles.phoneContainer}>
         <Ionicons

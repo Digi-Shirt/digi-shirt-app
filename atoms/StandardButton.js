@@ -12,7 +12,7 @@ import styles from '../constants/defaultStyle';
 
 const StandardButton = (props) => {
     
-  console.log("Standard button: title:"+ props.title + " onPress: " + props.onPress);
+  //console.log("Standard button: title:"+ props.title + " onPress: " + props.onPress);
   return (
     <TouchableOpacity
         style={styles.standardButton}

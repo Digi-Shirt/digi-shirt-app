@@ -71,6 +71,7 @@ export default function SettingsScreen({navigation}){
         //console.log(isEnabled);
     };
 
+
     
     return(
         <View style={styles.container}>
@@ -97,16 +98,10 @@ export default function SettingsScreen({navigation}){
                 </View>
             </View>
 
-            <Text style={styles.h2} >Change invite code </Text>
-            <Text style={styles.info} >This code is provided by your squadron.</Text>
-            <TextInput 
-                style={styles.input}            
-                placeholder='Invite Code'
-                defaultValue={settings.inviteCode}
-                onChangeText={code => {setInviteCode(code)}}
-                
-            />
-            <StandardButton title="Save Invite Code" onPress={dispatchUpdateInviteCode} />
+            <Text style={styles.info}>Use this button to reset your invite code. </Text>
+
+            <StandardButton title="Reset Invite Code" onPress={dispatchResetSettings} />
+            
             {/* <StandardButton title="Reset All Options" onPress={dispatchResetSettings} /> */}
 
         </View>
@@ -126,7 +121,7 @@ const styles = StyleSheet.create({
     info: {
         textAlign: "justify",
         fontSize: 18,
-        color: '#777',
+            color: '#777',
     },
     input: {
         fontSize: 24,

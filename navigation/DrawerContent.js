@@ -57,7 +57,8 @@ export function DrawerContent(props) {
     return(
         <DrawerContentScrollView {...props}>
 
-            <Text style={styles.navHeader}>Digi-Shirt</Text>
+            {/* <Text style={styles.navHeader}>Digi-Shirt</Text> */}
+            <Image source={require('../assets/images/digi-shirt-logo-wbg.jpg')} style={styles.dsLogo} />
             <CustomDrawerItemList {...props} />
 
             {imageExists && 
@@ -94,6 +95,14 @@ small: {
     width: "100%",
     resizeMode: "contain",
 },
+
+dsLogo: {
+    height: 100,
+    width: "100%",
+    resizeMode: "contain",
+    marginVertical: 20,
+},  
+
 navHeader:{
     fontSize: 30,
     
